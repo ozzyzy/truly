@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truly — Design Variants</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    background: #F5F5F0;
+    color: #1A1A1A;
+    padding: 40px 24px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #888;
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  /* ========== VARIANTS GRID ========== */
+  .variants-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 56px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .variant-block {
+    flex: 0 0 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+    background: white;
+  }
+
+  .variant-label {
+    padding: 16px 20px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* ========== PHONE MOCKUP ========== */
+  .phone {
+    width: 100%;
+    aspect-ratio: 9/19.5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ============ VARIANT A — NORDIC MINIMAL ============ */
+  .va { background: #FAFAF8; }
+  .va .status-bar {
+    height: 44px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 20px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #2C2C2C;
+    justify-content: space-between;
+  }
+  .va .nav {
+    padding: 8px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .va .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #C8C8C4;
+  }
+  .va .nav-dot.active { background: #2C2C2C; }
+  .va .greeting {
+    padding: 32px 20px 4px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #1A1A18;
+    line-height: 1.1;
+  }
+  .va .tagline {
+    padding: 4px 20px 24px;
+    font-size: 13px;
+    color: #999;
+  }
+  .va .cards-area {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .va-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #EBEBEB;
+  }
+  .va-card .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #BBBBB8;
+    margin-bottom: 6px;
+  }
+  .va-card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1A1A18;
+    margin-bottom: 4px;
+  }
+  .va-card .card-sub {
+    font-size: 12px;
+    color: #ABABAB;
+  }
+  .va-card .card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .va-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: #F2F2F0;
+    color: #888;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .va-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2C2C2C;
+  }
+  .va .fab {
+    position: absolute;
+    bottom: 24px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1A1A18;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .va .fab-plus {
+    width: 18px; height: 18px;
+    position: relative;
+  }
+  .va .fab-plus::before,
+  .va .fab-plus::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 2px;
+  }
+  .va .fab-plus::before { width: 2px; height: 18px; left: 8px; top: 0; }
+  .va .fab-plus::after  { width: 18px; height: 2px; left: 0; top: 8px; }
+
+  /* ============ VARIANT B — WARM ORGANIC ============ */
+  .vb { background: #FAF7F4; }
+  .vb .status-bar {
+    height: 44px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 20px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #3A2F28;
+    justify-content: space-between;
+  }
+  .vb .greeting {
+    padding: 28px 20px 4px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: #2A2018;
+    line-height: 1.15;
+  }
+  .vb .tagline {
+    padding: 4px 20px 20px;
+    font-size: 13px;
+    color: #A89888;
+  }
+  .vb .cards-area {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .vb-card {
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(120,80,50,0.07);
+  }
+  .vb-card .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #C4A898;
+    margin-bottom: 6px;
+  }
+  .vb-card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2A2018;
+    margin-bottom: 3px;
+  }
+  .vb-card .card-sub {
+    font-size: 12px;
+    color: #B0A090;
+  }
+  .vb-card .card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .vb-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: #FDF0E8;
+    color: #D07A50;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .vb-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2A2018;
+  }
+  .vb .fab {
+    position: absolute;
+    bottom: 24px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #EDA878, #D97A50);
+    box-shadow: 0 4px 16px rgba(200,100,60,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .vb .fab-plus {
+    width: 18px; height: 18px;
+    position: relative;
+  }
+  .vb .fab-plus::before,
+  .vb .fab-plus::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 2px;
+  }
+  .vb .fab-plus::before { width: 2px; height: 18px; left: 8px; top: 0; }
+  .vb .fab-plus::after  { width: 18px; height: 2px; left: 0; top: 8px; }
+
+  /* ============ VARIANT C — DARK FOCUS ============ */
+  .vc { background: #141210; }
+  .vc .status-bar {
+    height: 44px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 20px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,245,235,0.9);
+    justify-content: space-between;
+  }
+  .vc .greeting {
+    padding: 28px 20px 4px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: #F5EDE0;
+    line-height: 1.15;
+  }
+  .vc .tagline {
+    padding: 4px 20px 20px;
+    font-size: 13px;
+    color: rgba(245,237,224,0.45);
+  }
+  .vc .cards-area {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .vc-card {
+    background: rgba(255,255,255,0.055);
+    border-radius: 18px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .vc-card .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(245,237,224,0.35);
+    margin-bottom: 6px;
+  }
+  .vc-card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #F5EDE0;
+    margin-bottom: 3px;
+  }
+  .vc-card .card-sub {
+    font-size: 12px;
+    color: rgba(245,237,224,0.45);
+  }
+  .vc-card .card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .vc-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(220,160,80,0.15);
+    color: #DCA050;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .vc-time {
+    font-size: 13px;
+    font-weight: 700;
+    color: #F5EDE0;
+  }
+  .vc .fab {
+    position: absolute;
+    bottom: 24px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #DCA050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .vc .fab-plus {
+    width: 18px; height: 18px;
+    position: relative;
+  }
+  .vc .fab-plus::before,
+  .vc .fab-plus::after {
+    content: '';
+    position: absolute;
+    background: #141210;
+    border-radius: 2px;
+  }
+  .vc .fab-plus::before { width: 2px; height: 18px; left: 8px; top: 0; }
+  .vc .fab-plus::after  { width: 18px; height: 2px; left: 0; top: 8px; }
+
+  /* ========== PALETTE SECTION ========== */
+  .palettes-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 56px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .palette-block {
+    flex: 0 0 300px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+
+  .palette-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .palette-desc {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 0 0 auto;
+  }
+  .swatch-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch-label {
+    font-size: 9px;
+    color: #AAA;
+    text-align: center;
+    max-width: 44px;
+    line-height: 1.2;
+  }
+
+  /* ========== ICONS SECTION ========== */
+  .icons-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 56px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .icon-block {
+    flex: 0 0 200px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+
+  .app-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 22px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .icon-desc {
+    font-size: 11px;
+    color: #AAA;
+    line-height: 1.4;
+  }
+
+  /* Icon A — Sand & Line */
+  .icon-a {
+    background: #F5F0EB;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Icon B — Peach Gradient */
+  .icon-b {
+    background: linear-gradient(145deg, #FCDCC5, #E8886A);
+  }
+
+  /* Icon C — Dark Amber */
+  .icon-c {
+    background: linear-gradient(145deg, #2A2218, #1A1510);
+  }
+
+  /* Icon D — Sage */
+  .icon-d {
+    background: linear-gradient(145deg, #7BAF8F, #4E8B6A);
+  }
+
+  /* SVG icon mark */
+  svg.icon-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* ========== TYPOGRAPHY SECTION ========== */
+  .typo-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .typo-block {
+    flex: 0 0 280px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  .typo-variant {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #CCC;
+    margin-bottom: 12px;
+  }
+  .typo-title { font-weight: 700; margin-bottom: 4px; }
+  .typo-body  { color: #888; margin-bottom: 12px; }
+  .typo-row-nums {
+    display: flex;
+    gap: 16px;
+  }
+  .typo-num { font-weight: 800; }
+  .typo-cap { font-size: 11px; color: #AAA; margin-top: 2px; }
+
+  /* footer */
+  footer {
+    margin-top: 48px;
+    font-size: 12px;
+    color: #CCC;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Truly — Design Variants</h1>
+<p class="subtitle">Три направления дизайна · сравни и выбери</p>
+
+<!-- ===== SCREENS ===== -->
+<p class="section-title">Главный экран</p>
+
+<div class="variants-row">
+
+  <!-- === A: Nordic Minimal === -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#2C2C2C; background:#FAFAF8;">A — Nordic Minimal</div>
+    <div class="phone va">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>◆◆◆ ⬛ ■</span>
+      </div>
+      <div class="nav">
+        <div class="nav-dot active"></div>
+        <div class="nav-dot"></div>
+        <div class="nav-dot"></div>
+      </div>
+      <div class="greeting">Доброе утро,<br>Женя</div>
+      <div class="tagline">3 задачи · 1 ч 20 мин</div>
+      <div class="cards-area">
+        <div class="va-card">
+          <div class="card-label">Сейчас</div>
+          <div class="card-title">Работа над презентацией</div>
+          <div class="card-sub">Блок · Фокус</div>
+          <div class="card-row">
+            <span class="va-tag">25 мин</span>
+            <span class="va-time">→</span>
+          </div>
+        </div>
+        <div class="va-card" style="opacity:0.7;">
+          <div class="card-label">Далее</div>
+          <div class="card-title">Медитация</div>
+          <div class="card-sub">Личное · Восстановление</div>
+          <div class="card-row">
+            <span class="va-tag">10 мин</span>
+          </div>
+        </div>
+        <div class="va-card" style="opacity:0.45;">
+          <div class="card-label">Потом</div>
+          <div class="card-title">Звонок с командой</div>
+          <div class="card-sub">Работа · Встреча</div>
+          <div class="card-row">
+            <span class="va-tag">45 мин</span>
+          </div>
+        </div>
+      </div>
+      <div class="fab"><div class="fab-plus"></div></div>
+    </div>
+  </div>
+
+  <!-- === B: Warm Organic === -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#2A2018; background:#FAF7F4;">B — Warm Organic</div>
+    <div class="phone vb">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>◆◆◆ ⬛ ■</span>
+      </div>
+      <div style="width:36px; height:4px; background:#D4C8BC; border-radius:2px; margin:6px auto 0;"></div>
+      <div class="greeting">Доброе утро,<br>Женя</div>
+      <div class="tagline">3 задачи сегодня · 1 ч 20 мин</div>
+      <div class="cards-area">
+        <div class="vb-card">
+          <div class="card-label">Сейчас</div>
+          <div class="card-title">Работа над презентацией</div>
+          <div class="card-sub">Блок · Фокус</div>
+          <div class="card-row">
+            <span class="vb-tag">25 мин</span>
+            <span class="vb-time">▶</span>
+          </div>
+        </div>
+        <div class="vb-card" style="opacity:0.75;">
+          <div class="card-label">Далее</div>
+          <div class="card-title">Медитация</div>
+          <div class="card-sub">Личное · Восстановление</div>
+          <div class="card-row">
+            <span class="vb-tag">10 мин</span>
+          </div>
+        </div>
+        <div class="vb-card" style="opacity:0.45;">
+          <div class="card-label">Потом</div>
+          <div class="card-title">Звонок с командой</div>
+          <div class="card-sub">Работа · Встреча</div>
+          <div class="card-row">
+            <span class="vb-tag">45 мин</span>
+          </div>
+        </div>
+      </div>
+      <div class="fab"><div class="fab-plus"></div></div>
+    </div>
+  </div>
+
+  <!-- === C: Dark Focus === -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#F5EDE0; background:#141210;">C — Dark Focus</div>
+    <div class="phone vc">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span style="opacity:0.6;">◆◆◆ ⬛ ■</span>
+      </div>
+      <div style="width:36px; height:4px; background:rgba(245,237,224,0.15); border-radius:2px; margin:6px auto 0;"></div>
+      <div class="greeting">Доброе утро,<br>Женя</div>
+      <div class="tagline">3 задачи · 1 ч 20 мин</div>
+      <div class="cards-area">
+        <div class="vc-card">
+          <div class="card-label">Сейчас</div>
+          <div class="card-title">Работа над презентацией</div>
+          <div class="card-sub">Блок · Фокус</div>
+          <div class="card-row">
+            <span class="vc-tag">25 мин</span>
+            <span class="vc-time" style="color:#DCA050;">▶</span>
+          </div>
+        </div>
+        <div class="vc-card" style="opacity:0.6;">
+          <div class="card-label">Далее</div>
+          <div class="card-title">Медитация</div>
+          <div class="card-sub">Личное · Восстановление</div>
+          <div class="card-row">
+            <span class="vc-tag">10 мин</span>
+          </div>
+        </div>
+        <div class="vc-card" style="opacity:0.35;">
+          <div class="card-label">Потом</div>
+          <div class="card-title">Звонок с командой</div>
+          <div class="card-sub">Работа · Встреча</div>
+          <div class="card-row">
+            <span class="vc-tag">45 мин</span>
+          </div>
+        </div>
+      </div>
+      <div class="fab"><div class="fab-plus"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== TIMER SCREENS ===== -->
+<p class="section-title">Экран таймера</p>
+
+<div class="variants-row">
+
+  <!-- Timer A -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#2C2C2C; background:#FAFAF8;">A — Nordic Minimal</div>
+    <div class="phone va" style="align-items:center; justify-content:center; gap:0;">
+      <div style="position:absolute; top:44px; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:12px 20px;">
+        <span style="font-size:13px; color:#AAA;">← назад</span>
+        <span style="font-size:12px; font-weight:600; color:#CCC; letter-spacing:0.08em; text-transform:uppercase;">Фокус</span>
+        <span style="font-size:13px; color:#AAA;">···</span>
+      </div>
+      <div style="margin-top:-20px; text-align:center;">
+        <div style="width:160px; height:160px; border-radius:50%; border:2px solid #E8E8E4; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; position:relative;">
+          <!-- progress arc visual -->
+          <svg width="160" height="160" style="position:absolute; top:0; left:0;" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="76" fill="none" stroke="#EBEBEB" stroke-width="2"/>
+            <circle cx="80" cy="80" r="76" fill="none" stroke="#2C2C2C" stroke-width="2"
+              stroke-dasharray="478" stroke-dashoffset="160" stroke-linecap="round"
+              transform="rotate(-90 80 80)"/>
+          </svg>
+          <div style="text-align:center;">
+            <div style="font-size:36px; font-weight:700; letter-spacing:-1px; color:#1A1A18;">18:44</div>
+            <div style="font-size:11px; color:#CCC; letter-spacing:0.06em; text-transform:uppercase;">осталось</div>
+          </div>
+        </div>
+        <div style="font-size:15px; font-weight:600; color:#1A1A18; margin-bottom:6px;">Работа над презентацией</div>
+        <div style="font-size:12px; color:#BBB;">Блок · Фокус · 25 мин</div>
+        <div style="margin-top:32px; display:flex; gap:16px; align-items:center; justify-content:center;">
+          <div style="width:44px; height:44px; border-radius:50%; border:1.5px solid #DEDED8; display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px;">⟲</span>
+          </div>
+          <div style="width:56px; height:56px; border-radius:50%; background:#1A1A18; display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:22px; color:white; padding-left:3px;">▐▐</span>
+          </div>
+          <div style="width:44px; height:44px; border-radius:50%; border:1.5px solid #DEDED8; display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px;">✕</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer B -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#2A2018; background:#FAF7F4;">B — Warm Organic</div>
+    <div class="phone vb" style="align-items:center; justify-content:center;">
+      <div style="position:absolute; top:44px; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:12px 20px;">
+        <span style="font-size:13px; color:#C4A898;">← назад</span>
+        <span style="font-size:12px; font-weight:600; color:#C4A898; letter-spacing:0.08em; text-transform:uppercase;">Фокус</span>
+        <span style="font-size:13px; color:#C4A898;">···</span>
+      </div>
+      <div style="margin-top:-20px; text-align:center;">
+        <div style="width:164px; height:164px; border-radius:50%; background:white; box-shadow:0 8px 32px rgba(180,100,50,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; position:relative;">
+          <svg width="164" height="164" style="position:absolute; top:0; left:0;" viewBox="0 0 164 164">
+            <circle cx="82" cy="82" r="78" fill="none" stroke="#F5E8DE" stroke-width="4"/>
+            <circle cx="82" cy="82" r="78" fill="none" stroke="url(#warmGrad)" stroke-width="4"
+              stroke-dasharray="490" stroke-dashoffset="160" stroke-linecap="round"
+              transform="rotate(-90 82 82)"/>
+            <defs>
+              <linearGradient id="warmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#EDA878"/>
+                <stop offset="100%" style="stop-color:#D97A50"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div style="text-align:center;">
+            <div style="font-size:36px; font-weight:700; letter-spacing:-1px; color:#2A2018;">18:44</div>
+            <div style="font-size:11px; color:#C4A898; letter-spacing:0.06em;">осталось</div>
+          </div>
+        </div>
+        <div style="font-size:15px; font-weight:600; color:#2A2018; margin-bottom:6px;">Работа над презентацией</div>
+        <div style="font-size:12px; color:#B0A090;">Блок · Фокус · 25 мин</div>
+        <div style="margin-top:32px; display:flex; gap:16px; align-items:center; justify-content:center;">
+          <div style="width:44px; height:44px; border-radius:50%; background:white; box-shadow:0 2px 10px rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px;">⟲</span>
+          </div>
+          <div style="width:58px; height:58px; border-radius:50%; background:linear-gradient(145deg,#EDA878,#D97A50); box-shadow:0 6px 20px rgba(200,100,60,0.28); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:22px; color:white; padding-left:3px;">▐▐</span>
+          </div>
+          <div style="width:44px; height:44px; border-radius:50%; background:white; box-shadow:0 2px 10px rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px;">✕</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer C -->
+  <div class="variant-block">
+    <div class="variant-label" style="color:#F5EDE0; background:#141210;">C — Dark Focus</div>
+    <div class="phone vc" style="align-items:center; justify-content:center;">
+      <div style="position:absolute; top:44px; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:12px 20px;">
+        <span style="font-size:13px; color:rgba(245,237,224,0.4);">← назад</span>
+        <span style="font-size:12px; font-weight:600; color:rgba(245,237,224,0.4); letter-spacing:0.08em; text-transform:uppercase;">Фокус</span>
+        <span style="font-size:13px; color:rgba(245,237,224,0.4);">···</span>
+      </div>
+      <div style="margin-top:-20px; text-align:center;">
+        <div style="width:164px; height:164px; border-radius:50%; position:relative; margin:0 auto 24px; display:flex; align-items:center; justify-content:center;">
+          <svg width="164" height="164" style="position:absolute; top:0; left:0;" viewBox="0 0 164 164">
+            <circle cx="82" cy="82" r="78" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>
+            <circle cx="82" cy="82" r="78" fill="none" stroke="#DCA050" stroke-width="3"
+              stroke-dasharray="490" stroke-dashoffset="160" stroke-linecap="round"
+              transform="rotate(-90 82 82)"/>
+          </svg>
+          <div style="text-align:center;">
+            <div style="font-size:36px; font-weight:700; letter-spacing:-1px; color:#F5EDE0;">18:44</div>
+            <div style="font-size:11px; color:rgba(245,237,224,0.4); letter-spacing:0.06em;">осталось</div>
+          </div>
+        </div>
+        <div style="font-size:15px; font-weight:600; color:#F5EDE0; margin-bottom:6px;">Работа над презентацией</div>
+        <div style="font-size:12px; color:rgba(245,237,224,0.4);">Блок · Фокус · 25 мин</div>
+        <div style="margin-top:32px; display:flex; gap:16px; align-items:center; justify-content:center;">
+          <div style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px; color:rgba(245,237,224,0.5);">⟲</span>
+          </div>
+          <div style="width:58px; height:58px; border-radius:50%; background:#DCA050; box-shadow:0 6px 24px rgba(220,160,80,0.3); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:20px; color:#141210; padding-left:3px;">▐▐</span>
+          </div>
+          <div style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:16px; color:rgba(245,237,224,0.5);">✕</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== PALETTES ===== -->
+<p class="section-title">Цветовые палитры</p>
+
+<div class="palettes-row">
+
+  <!-- Palette A -->
+  <div class="palette-block">
+    <div class="palette-name">A — Stone & Ink</div>
+    <div class="palette-desc">Нейтральный, типографический, без акцентов</div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-dot" style="background:#FAFAF8;"></div><div class="swatch-label">Фон</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;"></div><div class="swatch-label">Карточка</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F2F2F0;"></div><div class="swatch-label">Surface 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1A1A18;"></div><div class="swatch-label">Текст</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#ABABAB;"></div><div class="swatch-label">Текст 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#2C2C2C;"></div><div class="swatch-label">Акцент</div></div>
+    </div>
+    <div style="font-size:11px; color:#CCC; line-height:1.6;">
+      Чистый, офисный стиль. Акцент — сам шрифт.<br>
+      Подходит для productivity-приложений без визуального шума.
+    </div>
+  </div>
+
+  <!-- Palette B -->
+  <div class="palette-block">
+    <div class="palette-name">B — Peach & Sage</div>
+    <div class="palette-desc">Тёплый органический, текущее направление</div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-dot" style="background:#FAF7F4;"></div><div class="swatch-label">Фон</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;"></div><div class="swatch-label">Карточка</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F5EDE5;"></div><div class="swatch-label">Surface 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#2A2018;"></div><div class="swatch-label">Текст</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#B0A090;"></div><div class="swatch-label">Текст 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#EDA878;"></div><div class="swatch-label">Акцент</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#70A884;"></div><div class="swatch-label">Акцент 2</div></div>
+    </div>
+    <div style="font-size:11px; color:#CCC; line-height:1.6;">
+      Уют, тепло, «мягкое» время. Персик = энергия,<br>
+      шалфей = восстановление. Женственная палитра.
+    </div>
+  </div>
+
+  <!-- Palette C -->
+  <div class="palette-block">
+    <div class="palette-name">C — Ember & Coal</div>
+    <div class="palette-desc">Тёмный, фокусный, премиальный</div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-dot" style="background:#141210;"></div><div class="swatch-label">Фон</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1E1A16;"></div><div class="swatch-label">Карточка</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#2A2520;"></div><div class="swatch-label">Surface 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F5EDE0;"></div><div class="swatch-label">Текст</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#8A7E72;"></div><div class="swatch-label">Текст 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#DCA050;"></div><div class="swatch-label">Акцент</div></div>
+    </div>
+    <div style="font-size:11px; color:#CCC; line-height:1.6;">
+      Глубокий, медитативный. Янтарь на угле —<br>
+      ощущение огня, концентрации, вечернего ритуала.
+    </div>
+  </div>
+
+  <!-- Palette D — Lavender option -->
+  <div class="palette-block">
+    <div class="palette-name">D — Mist & Plum</div>
+    <div class="palette-desc">Лавандово-туманный, спокойный</div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-dot" style="background:#F8F7FB;"></div><div class="swatch-label">Фон</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#FFFFFF;"></div><div class="swatch-label">Карточка</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F0EEFA;"></div><div class="swatch-label">Surface 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1E1828;"></div><div class="swatch-label">Текст</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#9E98B0;"></div><div class="swatch-label">Текст 2</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#7A68C0;"></div><div class="swatch-label">Акцент</div></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#C0889A;"></div><div class="swatch-label">Акцент 2</div></div>
+    </div>
+    <div style="font-size:11px; color:#CCC; line-height:1.6;">
+      Нежный, неожиданный. Лаванда + приглушённая<br>
+      роза. Спокойный, но не скучный.
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== APP ICONS ===== -->
+<p class="section-title">Иконки приложения</p>
+
+<div class="icons-row">
+
+  <!-- Icon 1 -->
+  <div class="icon-block">
+    <div class="app-icon icon-a">
+      <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="26" stroke="#2C2C2C" stroke-width="2"/>
+        <line x1="45" y1="45" x2="45" y2="26" stroke="#2C2C2C" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="45" y1="45" x2="56" y2="50" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="45" cy="45" r="2.5" fill="#2C2C2C"/>
+      </svg>
+    </div>
+    <div class="icon-name">A — Часы</div>
+    <div class="icon-desc">Классика. Минимал. Монохром на светлом.</div>
+  </div>
+
+  <!-- Icon 2 -->
+  <div class="icon-block">
+    <div class="app-icon icon-b">
+      <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- leaf / drop shape -->
+        <path d="M45 22 C55 30, 64 38, 64 50 C64 62, 55 70, 45 70 C35 70, 26 62, 26 50 C26 38, 35 30, 45 22Z" fill="white" opacity="0.92"/>
+        <path d="M45 32 C50 38, 55 44, 55 51 C55 58, 50 63, 45 63 C40 63, 35 58, 35 51 C35 44, 40 38, 45 32Z" fill="none" stroke="rgba(220,100,60,0.3)" stroke-width="1.5"/>
+        <line x1="45" y1="40" x2="45" y2="55" stroke="#D97A50" stroke-width="2" stroke-linecap="round"/>
+        <line x1="45" y1="55" x2="51" y2="59" stroke="#D97A50" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="45" cy="55" r="2" fill="#D97A50"/>
+      </svg>
+    </div>
+    <div class="icon-name">B — Капля</div>
+    <div class="icon-desc">Персик + органическая форма. Таймер внутри.</div>
+  </div>
+
+  <!-- Icon 3 -->
+  <div class="icon-block">
+    <div class="app-icon icon-c">
+      <!-- dark amber version -->
+      <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="27" stroke="#DCA050" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="45" cy="45" r="27" fill="none" stroke="#DCA050" stroke-width="1.5"
+          stroke-dasharray="169" stroke-dashoffset="50" stroke-linecap="round"
+          transform="rotate(-90 45 45)"/>
+        <line x1="45" y1="45" x2="45" y2="24" stroke="#DCA050" stroke-width="2" stroke-linecap="round"/>
+        <line x1="45" y1="45" x2="57" y2="51" stroke="#DCA050" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="45" cy="45" r="3" fill="#DCA050"/>
+      </svg>
+    </div>
+    <div class="icon-name">C — Дуга</div>
+    <div class="icon-desc">Тёмный фон, янтарный прогресс. Премиум.</div>
+  </div>
+
+  <!-- Icon 4 -->
+  <div class="icon-block">
+    <div class="app-icon icon-d">
+      <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- T letter + spark -->
+        <text x="45" y="56" font-family="-apple-system, Helvetica" font-size="38" font-weight="800" fill="white" text-anchor="middle">T</text>
+        <circle cx="63" cy="27" r="5" fill="white" opacity="0.8"/>
+        <circle cx="63" cy="27" r="2.5" fill="white"/>
+      </svg>
+    </div>
+    <div class="icon-name">D — Логотип</div>
+    <div class="icon-desc">T как "Truly". Шалфей + точка-акцент.</div>
+  </div>
+
+</div>
+
+<!-- ===== TYPOGRAPHY ===== -->
+<p class="section-title">Типографика</p>
+
+<div class="typo-row">
+  <div class="typo-block">
+    <div class="typo-variant">Вариант A — SF Rounded</div>
+    <div class="typo-title" style="font-size:22px; font-family:-apple-system; font-weight:700; letter-spacing:-0.4px;">Доброе утро, Женя</div>
+    <div class="typo-body" style="font-size:14px; font-family:-apple-system;">Три задачи ждут тебя сегодня</div>
+    <div class="typo-row-nums">
+      <div><div class="typo-num" style="font-size:24px; font-weight:800;">1ч 20м</div><div class="typo-cap">итого</div></div>
+      <div><div class="typo-num" style="font-size:24px; font-weight:800;">3</div><div class="typo-cap">задачи</div></div>
+    </div>
+    <div style="margin-top:12px; font-size:11px; color:#CCC;">SF Pro Rounded — мягкий системный шрифт</div>
+  </div>
+
+  <div class="typo-block">
+    <div class="typo-variant">Вариант B — Geometric</div>
+    <div class="typo-title" style="font-size:22px; font-family:Georgia,serif; font-weight:700; letter-spacing:-0.3px; font-style:italic;">Доброе утро, Женя</div>
+    <div class="typo-body" style="font-size:14px; font-family:-apple-system; letter-spacing:0.01em;">Три задачи ждут тебя сегодня</div>
+    <div class="typo-row-nums">
+      <div><div class="typo-num" style="font-size:24px; font-weight:800; font-family:Georgia; font-style:italic;">1ч 20м</div><div class="typo-cap">итого</div></div>
+      <div><div class="typo-num" style="font-size:24px; font-weight:800; font-family:Georgia; font-style:italic;">3</div><div class="typo-cap">задачи</div></div>
+    </div>
+    <div style="margin-top:12px; font-size:11px; color:#CCC;">Georgia Italic для заголовков — характер, теплота</div>
+  </div>
+
+  <div class="typo-block">
+    <div class="typo-variant">Вариант C — Mono accent</div>
+    <div class="typo-title" style="font-size:22px; font-family:-apple-system; font-weight:700; letter-spacing:-0.4px;">Доброе утро, Женя</div>
+    <div class="typo-body" style="font-size:14px; font-family:-apple-system;">Три задачи ждут тебя сегодня</div>
+    <div class="typo-row-nums">
+      <div><div class="typo-num" style="font-size:24px; font-weight:700; font-family:'Courier New',monospace; letter-spacing:-1px;">1:20</div><div class="typo-cap">итого</div></div>
+      <div><div class="typo-num" style="font-size:24px; font-weight:700; font-family:'Courier New',monospace;">03</div><div class="typo-cap">задачи</div></div>
+    </div>
+    <div style="margin-top:12px; font-size:11px; color:#CCC;">Монопространственный шрифт для цифр — техничность</div>
+  </div>
+</div>
+
+<footer>Truly Design Exploration · 2026</footer>
+
+</body>
+</html>

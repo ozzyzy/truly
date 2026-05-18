@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>truly — Final Screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#006c4c",
+        "primary-container": "#3db88a",
+        "on-primary-container": "#00432e",
+        "surface": "#f6faf8",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f0f4f2",
+        "surface-container": "#ebefed",
+        "surface-container-high": "#e5e9e7",
+        "surface-container-highest": "#dfe3e1",
+        "surface-dim": "#d7dbd9",
+        "on-surface": "#181d1c",
+        "on-surface-variant": "#3d4a43",
+        "outline": "#6d7a72",
+        "outline-variant": "#bccac1",
+        "secondary": "#58605d",
+        "secondary-container": "#d9e1de",
+        "on-secondary-container": "#5c6461",
+        "primary-fixed": "#83f8c6",
+        "primary-fixed-dim": "#65dcab",
+        "background": "#f6faf8",
+      },
+      borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+      fontFamily: { "body": ["Plus Jakarta Sans"] }
+    }
+  }
+}
+</script>
+<style>
+  * { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  body { background: #E8EDE9; }
+
+  /* Phone frame */
+  .phone-frame {
+    width: 375px;
+    min-height: 812px;
+    border-radius: 44px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+    position: relative;
+    background: #f6faf8;
+    flex-shrink: 0;
+  }
+  .phone-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6d7a72;
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .screens-row {
+    display: flex;
+    gap: 32px;
+    padding: 48px;
+    overflow-x: auto;
+    align-items: flex-start;
+  }
+
+  /* Reusable */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Premium gradients */
+  .premium-gradient { background: linear-gradient(145deg, #3DB88A 0%, #2A9070 100%); }
+  .premium-gradient-surface { background: linear-gradient(180deg, #ffffff 0%, #f0f4f2 100%); }
+  .glass-card {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.55);
+  }
+  .mint-glow { box-shadow: 0 12px 32px rgba(61,184,138,0.1); }
+  .logo-text {
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    color: #181d1c;
+  }
+  .progress-ring__circle {
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1);
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  .mint-gradient-text {
+    background: linear-gradient(135deg, #006C4C 0%, #3DB88A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .ios-separator { position: relative; }
+  .ios-separator:not(:last-child)::after {
+    content: ''; position: absolute; bottom: 0; right: 0; left: 1.5rem;
+    height: 1px; background-color: #ebefed;
+  }
+  .settings-card {
+    background: #fff; border-radius: 1.25rem; overflow: hidden;
+    box-shadow: 0 12px 32px rgba(61,184,138,0.06);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Floating blob animations */
+  @keyframes floatA {
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(18px,-14px) scale(1.06); }
+    66%  { transform: translate(-12px,10px) scale(0.96); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+  @keyframes floatB {
+    0%   { transform: translate(0,0) scale(1); }
+    40%  { transform: translate(-16px,20px) scale(1.08); }
+    70%  { transform: translate(10px,-8px) scale(0.94); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+  @keyframes floatC {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(12px,16px) scale(1.05); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.22; }
+    50%       { opacity: 0.38; }
+  }
+  @keyframes pulseDim {
+    0%, 100% { opacity: 0.10; }
+    50%       { opacity: 0.18; }
+  }
+  .blob-a { animation: floatA 11s ease-in-out infinite; }
+  .blob-b { animation: floatB 14s ease-in-out infinite; }
+  .blob-c { animation: floatC 9s ease-in-out infinite; }
+  .blob-pulse { animation: pulseGlow 8s ease-in-out infinite; }
+  .blob-pulse-dim { animation: pulseDim 10s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- Page header -->
+<div style="padding: 40px 48px 0; display:flex; align-items:baseline; gap:16px;">
+  <span style="font-size:32px; font-weight:800; letter-spacing:-1px; color:#181d1c;">truly</span>
+  <span style="font-size:14px; color:#6d7a72; font-weight:500;">MVP · Final Screens · 2026</span>
+</div>
+
+<div class="screens-row">
+
+  <!-- ════════════════════════════════════════
+       SCREEN 1 — MAIN / RANDOM ACTION (Premium)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">Main · Random Action</p>
+    <div class="phone-frame">
+      <!-- Decorative blobs -->
+      <div class="blob-a blob-pulse" style="position:absolute;top:-10%;left:-20%;width:70%;height:50%;background:rgba(131,248,198,0.25);border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;"></div>
+      <div class="blob-b blob-pulse-dim" style="position:absolute;bottom:5%;right:-20%;width:60%;height:40%;background:rgba(61,184,138,0.12);border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;"></div>
+      <div class="blob-c" style="position:absolute;top:40%;left:10%;width:50%;height:30%;background:rgba(131,248,198,0.08);border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0;"></div>
+
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;min-height:812px;">
+        <!-- Nav -->
+        <nav style="display:flex;justify-content:space-between;align-items:center;padding:56px 24px 8px;">
+          <span class="logo-text" style="font-size:28px;">truly</span>
+          <button style="width:40px;height:40px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:20px;color:#3d4a43;">settings</span>
+          </button>
+        </nav>
+
+        <!-- Main card -->
+        <main style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 160px;">
+          <!-- Random suggestion label -->
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;opacity:0.6;">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#006c4c;">shuffle</span>
+            <span style="font-size:12px;font-weight:600;color:#3d4a43;letter-spacing:0.04em;">random pick for you</span>
+          </div>
+          <div class="glass-card" style="width:100%;border-radius:40px;overflow:hidden;">
+            <div style="padding:40px 32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#3d4a43;opacity:0.6;margin-bottom:28px;">BODY</span>
+              <div style="margin-bottom:20px;width:88px;height:88px;background:rgba(61,184,138,0.08);border-radius:28px;display:flex;align-items:center;justify-content:center;">
+                <span class="material-symbols-outlined" style="font-size:52px;color:#006c4c;font-variation-settings:'wght' 200;">directions_walk</span>
+              </div>
+              <h1 style="font-size:30px;font-weight:800;color:#181d1c;letter-spacing:-0.5px;margin-bottom:14px;line-height:1.1;">Evening walk</h1>
+              <div style="background:rgba(0,108,76,0.06);border:1px solid rgba(0,108,76,0.1);padding:6px 20px;border-radius:100px;">
+                <span style="font-size:13px;font-weight:700;color:#006c4c;">20 min</span>
+              </div>
+            </div>
+            <div style="padding:0 32px 32px;">
+              <div style="height:1px;background:linear-gradient(to right, transparent, #ebefed, transparent);margin-bottom:20px;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <button style="width:48px;height:48px;border-radius:16px;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+                  <span class="material-symbols-outlined" style="font-size:22px;color:#3d4a43;">favorite</span>
+                </button>
+                <button style="width:48px;height:48px;border-radius:16px;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+                  <span class="material-symbols-outlined" style="font-size:22px;color:#3d4a43;">shuffle</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Link -->
+          <div style="display:flex;align-items:center;gap:6px;margin-top:28px;color:#3db88a;font-weight:600;font-size:14px;cursor:pointer;">
+            <span>choose something else</span>
+            <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+          </div>
+        </main>
+
+        <!-- Fixed bottom -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:0 24px 40px;background:linear-gradient(to top, #f6faf8 60%, transparent);">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <button class="premium-gradient" style="width:100%;height:58px;border-radius:100px;border:none;color:white;font-size:18px;font-weight:800;cursor:pointer;letter-spacing:-0.2px;box-shadow:0 10px 24px rgba(42,144,112,0.35);">
+              Start
+            </button>
+            <p style="font-size:12px;color:#3d4a43;opacity:0.7;font-weight:500;">or tap <span style="color:#3db88a;">♥</span> to save for later</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SCREEN 2 — LIBRARY (v2)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">Library · Choose a moment</p>
+    <div class="phone-frame" style="background:rgba(0,0,0,0.35);">
+      <!-- Blurred background suggestion -->
+      <div style="position:absolute;inset:0;background:#f6faf8;opacity:0.3;z-index:0;display:flex;flex-direction:column;padding:60px 24px;">
+        <div style="height:200px;background:#ebefed;border-radius:24px;margin-bottom:16px;"></div>
+        <div style="height:24px;background:#dfe3e1;border-radius:12px;width:70%;margin-bottom:12px;"></div>
+        <div style="height:100px;background:#ebefed;border-radius:16px;"></div>
+      </div>
+      <!-- Sheet -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:90%;background:#f6faf8;border-radius:32px 32px 0 0;z-index:1;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -12px 40px rgba(61,184,138,0.1);">
+        <!-- Handle -->
+        <div style="display:flex;justify-content:center;padding:12px 0 4px;">
+          <div style="width:40px;height:5px;border-radius:3px;background:#bccac1;opacity:0.5;"></div>
+        </div>
+        <!-- Header -->
+        <div style="padding:8px 24px 12px;display:flex;justify-content:space-between;align-items:center;">
+          <h1 style="font-size:22px;font-weight:800;color:#181d1c;letter-spacing:-0.4px;">Choose a moment</h1>
+          <button style="width:36px;height:36px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:18px;color:#3d4a43;">close</span>
+          </button>
+        </div>
+        <!-- Scrollable -->
+        <div style="flex:1;overflow-y:auto;" class="no-scrollbar">
+          <!-- Favourites -->
+          <div style="padding:4px 24px 8px;">
+            <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3d4a43;margin-bottom:10px;">Your favourites</p>
+            <div style="display:flex;gap:10px;overflow-x:auto;" class="no-scrollbar">
+              <button style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:white;border:1.5px solid rgba(61,184,138,0.25);font-size:13px;font-weight:600;color:#181d1c;white-space:nowrap;cursor:pointer;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:16px;color:#3db88a;font-variation-settings:'FILL' 1;">favorite</span>Morning Flow
+              </button>
+              <button style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:white;border:1.5px solid rgba(61,184,138,0.25);font-size:13px;font-weight:600;color:#181d1c;white-space:nowrap;cursor:pointer;flex-shrink:0;">
+                <span class="material-symbols-outlined" style="font-size:16px;color:#3db88a;font-variation-settings:'FILL' 1;">bedtime</span>Deep Sleep
+              </button>
+            </div>
+          </div>
+          <!-- Category chips -->
+          <div style="padding:12px 24px 0;display:flex;gap:8px;overflow-x:auto;" class="no-scrollbar">
+            <button style="padding:7px 18px;border-radius:100px;background:#3db88a;color:#00432e;font-weight:700;font-size:13px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">All</button>
+            <button style="padding:7px 18px;border-radius:100px;background:#e5e9e7;color:#3d4a43;font-weight:600;font-size:13px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">Body</button>
+            <button style="padding:7px 18px;border-radius:100px;background:#e5e9e7;color:#3d4a43;font-weight:600;font-size:13px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">Rest</button>
+            <button style="padding:7px 18px;border-radius:100px;background:#e5e9e7;color:#3d4a43;font-weight:600;font-size:13px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">Focus</button>
+            <button style="padding:7px 18px;border-radius:100px;background:#e5e9e7;color:#3d4a43;font-weight:600;font-size:13px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;">Creative</button>
+          </div>
+          <!-- Action list -->
+          <div style="padding:12px 24px 32px;display:flex;flex-direction:column;gap:8px;">
+            <!-- Row template -->
+            <div style="display:flex;align-items:center;height:72px;background:white;border-radius:18px;padding:0 16px;cursor:pointer;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(61,184,138,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;">
+                <span class="material-symbols-outlined" style="font-size:22px;color:#006c4c;">self_improvement</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:15px;font-weight:700;color:#181d1c;line-height:1.2;">Mindful Breathing</p>
+                <p style="font-size:12px;color:#3d4a43;opacity:0.7;">Focus · 10 min</p>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px;color:#bccac1;">chevron_right</span>
+            </div>
+            <div style="display:flex;align-items:center;height:72px;background:white;border-radius:18px;padding:0 16px;cursor:pointer;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(61,184,138,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;">
+                <span class="material-symbols-outlined" style="font-size:22px;color:#006c4c;">directions_walk</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:15px;font-weight:700;color:#181d1c;line-height:1.2;">Evening walk</p>
+                <p style="font-size:12px;color:#3d4a43;opacity:0.7;">Body · 20 min</p>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px;color:#bccac1;">chevron_right</span>
+            </div>
+            <div style="display:flex;align-items:center;height:72px;background:white;border-radius:18px;padding:0 16px;cursor:pointer;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(61,184,138,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;">
+                <span class="material-symbols-outlined" style="font-size:22px;color:#006c4c;">palette</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:15px;font-weight:700;color:#181d1c;line-height:1.2;">Expressive Sketching</p>
+                <p style="font-size:12px;color:#3d4a43;opacity:0.7;">Creative · 15 min</p>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px;color:#bccac1;">chevron_right</span>
+            </div>
+            <div style="display:flex;align-items:center;height:72px;background:white;border-radius:18px;padding:0 16px;cursor:pointer;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(61,184,138,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;">
+                <span class="material-symbols-outlined" style="font-size:22px;color:#006c4c;">auto_awesome</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:15px;font-weight:700;color:#181d1c;line-height:1.2;">Gratitude Journal</p>
+                <p style="font-size:12px;color:#3d4a43;opacity:0.7;">Connection · 5 min</p>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px;color:#bccac1;">chevron_right</span>
+            </div>
+            <div style="display:flex;align-items:center;height:72px;background:white;border-radius:18px;padding:0 16px;cursor:pointer;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(61,184,138,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;">
+                <span class="material-symbols-outlined" style="font-size:22px;color:#006c4c;">groups</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:15px;font-weight:700;color:#181d1c;line-height:1.2;">Shared Tea</p>
+                <p style="font-size:12px;color:#3d4a43;opacity:0.7;">Connection · 15 min</p>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:18px;color:#bccac1;">chevron_right</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SCREEN 3 — TIMER (Premium)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">Timer</p>
+    <div class="phone-frame">
+      <div class="blob-b blob-pulse-dim" style="position:absolute;top:20%;right:-20%;width:60%;height:50%;background:rgba(61,184,138,0.10);border-radius:50%;filter:blur(100px);pointer-events:none;"></div>
+      <div class="blob-a" style="position:absolute;bottom:15%;left:-15%;width:50%;height:40%;background:rgba(0,108,76,0.07);border-radius:50%;filter:blur(90px);pointer-events:none;"></div>
+
+      <div style="display:flex;flex-direction:column;min-height:812px;position:relative;z-index:1;">
+        <!-- Header -->
+        <header style="display:flex;justify-content:space-between;align-items:center;padding:56px 24px 16px;">
+          <button style="width:40px;height:40px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:20px;color:#006c4c;">arrow_back_ios</span>
+          </button>
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#3d4a43;opacity:0.7;">BODY</span>
+          <button style="width:40px;height:40px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:20px;color:#006c4c;">more_horiz</span>
+          </button>
+        </header>
+
+        <!-- Timer ring -->
+        <main style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px 32px;">
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:36px;">
+            <!-- Glass base -->
+            <div style="position:absolute;width:316px;height:316px;border-radius:50%;background:rgba(255,255,255,0.45);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.4);"></div>
+            <svg width="293" height="293">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3db88a"/>
+                  <stop offset="100%" stop-color="#006c4c"/>
+                </linearGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <circle cx="146.5" cy="146.5" r="130" fill="none" stroke="#ebefed" stroke-width="4"/>
+              <circle class="progress-ring__circle" cx="146.5" cy="146.5" r="130" fill="none"
+                stroke="url(#ringGrad)" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="817" stroke-dashoffset="200" filter="url(#glow)"/>
+            </svg>
+            <div style="position:absolute;text-align:center;">
+              <div style="font-size:58px;font-weight:700;letter-spacing:-2px;color:#181d1c;line-height:1;">14:28</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#3d4a43;opacity:0.5;margin-top:6px;">remaining</div>
+            </div>
+          </div>
+          <!-- Details -->
+          <div style="text-align:center;margin-bottom:44px;">
+            <p style="font-size:22px;font-weight:700;color:#181d1c;margin-bottom:6px;">Evening walk</p>
+            <p style="font-size:14px;color:#3d4a43;opacity:0.7;">Body · 20 min</p>
+          </div>
+          <!-- Controls -->
+          <div style="display:flex;align-items:center;gap:28px;">
+            <button class="premium-gradient-surface" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.7);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+              <span class="material-symbols-outlined" style="font-size:24px;color:#3d4a43;">replay</span>
+            </button>
+            <button class="premium-gradient" style="width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,0.25);cursor:pointer;box-shadow:0 16px 40px rgba(42,144,112,0.4);">
+              <span class="material-symbols-outlined" style="font-size:38px;color:white;font-variation-settings:'FILL' 1;">pause</span>
+            </button>
+            <button class="premium-gradient-surface" style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.7);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.06);">
+              <span class="material-symbols-outlined" style="font-size:24px;color:#3d4a43;">check</span>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SCREEN 4 — DONE (v2, cleaned)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">Done</p>
+    <div class="phone-frame">
+      <div class="blob-a blob-pulse" style="position:absolute;top:-5%;right:-15%;width:60%;height:45%;background:rgba(131,248,198,0.22);border-radius:50%;filter:blur(90px);pointer-events:none;"></div>
+      <div class="blob-c blob-pulse-dim" style="position:absolute;bottom:10%;left:-20%;width:55%;height:40%;background:rgba(61,184,138,0.08);border-radius:50%;filter:blur(80px);pointer-events:none;"></div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:812px;padding:40px 28px;text-align:center;position:relative;z-index:1;">
+        <!-- Icon -->
+        <div style="width:96px;height:96px;border-radius:50%;background:rgba(61,184,138,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+          <span class="material-symbols-outlined" style="font-size:52px;color:#3db88a;font-variation-settings:'FILL' 1;">auto_awesome</span>
+        </div>
+        <!-- Title -->
+        <h1 style="font-size:36px;font-weight:800;color:#181d1c;letter-spacing:-1px;margin-bottom:8px;">Done.</h1>
+        <p style="font-size:17px;color:#3d4a43;margin-bottom:48px;font-weight:500;">You <span style="color:#006c4c;font-weight:800;">reclaimed</span> 20 minutes.</p>
+
+        <!-- Stats card -->
+        <div style="width:100%;background:white;border-radius:28px;padding:28px 24px;box-shadow:0 12px 32px rgba(61,184,138,0.1);margin-bottom:auto;">
+          <p style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3d4a43;opacity:0.6;margin-bottom:20px;">you reclaimed</p>
+          <div style="display:flex;align-items:center;">
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:26px;font-weight:800;color:#181d1c;letter-spacing:-0.5px;margin-bottom:4px;">35 min</p>
+              <p style="font-size:12px;color:#3d4a43;opacity:0.6;">today</p>
+            </div>
+            <div style="width:1px;height:48px;background:#ebefed;"></div>
+            <div style="flex:1;text-align:center;">
+              <p style="font-size:22px;font-weight:800;color:#181d1c;letter-spacing:-0.5px;margin-bottom:4px;">2 hr 10 min</p>
+              <p style="font-size:12px;color:#3d4a43;opacity:0.6;">this week</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div style="width:100%;padding-top:40px;">
+          <button class="premium-gradient" style="width:100%;height:58px;border-radius:100px;border:none;color:white;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px rgba(42,144,112,0.3);">
+            Back to today
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SCREEN 5 — HISTORY (v2)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">History</p>
+    <div class="phone-frame">
+      <div style="display:flex;flex-direction:column;min-height:812px;">
+        <!-- Header -->
+        <header style="display:flex;justify-content:space-between;align-items:center;padding:56px 24px 8px;">
+          <div style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:20px;color:#006c4c;">arrow_back_ios</span>
+          </div>
+          <span style="font-size:22px;font-weight:300;letter-spacing:-0.5px;color:#006c4c;">Your time</span>
+          <div style="width:28px;"></div>
+        </header>
+
+        <main style="flex:1;padding:8px 20px 32px;overflow-y:auto;" class="no-scrollbar">
+          <!-- Week card -->
+          <div style="background:white;border-radius:24px;padding:24px;margin-bottom:20px;box-shadow:0 8px 24px rgba(61,184,138,0.07);">
+            <p style="font-size:12px;color:#3d4a43;opacity:0.7;margin-bottom:6px;font-weight:500;">This week</p>
+            <p style="font-size:30px;font-weight:800;color:#181d1c;letter-spacing:-1px;margin-bottom:20px;">4 hr 20 min</p>
+            <!-- Bar chart -->
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;height:80px;gap:6px;padding:0 4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.2);border-radius:6px;height:38%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">M</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.4);border-radius:6px;height:60%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">T</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:#3db88a;border-radius:6px;height:100%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#006c4c;">W</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.55);border-radius:6px;height:72%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">T</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.3);border-radius:6px;height:45%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">F</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.12);border-radius:6px;height:20%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">S</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;">
+                <div style="width:100%;background:rgba(61,184,138,0.08);border-radius:6px;height:10%;"></div>
+                <span style="font-size:9px;font-weight:700;color:#3d4a43;opacity:0.5;">S</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saved chips -->
+          <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3d4a43;opacity:0.6;margin-bottom:10px;padding:0 4px;">Saved</p>
+          <div style="display:flex;gap:8px;overflow-x:auto;margin-bottom:20px;" class="no-scrollbar">
+            <button style="padding:7px 16px;border-radius:100px;background:#3db88a;color:#00432e;font-weight:700;font-size:12px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:6px;">
+              <span class="material-symbols-outlined" style="font-size:14px;font-variation-settings:'FILL' 1;">favorite</span>Meditation
+            </button>
+            <button style="padding:7px 16px;border-radius:100px;background:#d9e1de;color:#5c6461;font-weight:600;font-size:12px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:6px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">directions_walk</span>Walk
+            </button>
+            <button style="padding:7px 16px;border-radius:100px;background:#d9e1de;color:#5c6461;font-weight:600;font-size:12px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:6px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">bolt</span>Focus
+            </button>
+          </div>
+
+          <!-- Recent list -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px;">
+            <p style="font-size:16px;font-weight:700;color:#181d1c;">Recent moments</p>
+            <span style="font-size:13px;font-weight:700;color:#3db88a;cursor:pointer;">See all</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="height:68px;background:white;border-radius:18px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(61,184,138,0.1);display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#006c4c;">psychology</span>
+                </div>
+                <div>
+                  <p style="font-size:14px;font-weight:700;color:#181d1c;">Deep Focus</p>
+                  <p style="font-size:11px;color:#3d4a43;opacity:0.6;">Today · 45 min</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:22px;color:#3db88a;font-variation-settings:'FILL' 1;">check_circle</span>
+            </div>
+            <div style="height:68px;background:white;border-radius:18px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(61,184,138,0.1);display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#006c4c;">directions_walk</span>
+                </div>
+                <div>
+                  <p style="font-size:14px;font-weight:700;color:#181d1c;">Evening walk</p>
+                  <p style="font-size:11px;color:#3d4a43;opacity:0.6;">Yesterday · 20 min</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:22px;color:#3db88a;font-variation-settings:'FILL' 1;">check_circle</span>
+            </div>
+            <div style="height:68px;background:white;border-radius:18px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:40px;height:40px;border-radius:50%;background:rgba(61,184,138,0.1);display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#006c4c;">self_improvement</span>
+                </div>
+                <div>
+                  <p style="font-size:14px;font-weight:700;color:#181d1c;">Meditation</p>
+                  <p style="font-size:11px;color:#3d4a43;opacity:0.6;">Mon · 20 min</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="font-size:22px;color:#3db88a;font-variation-settings:'FILL' 1;">check_circle</span>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SCREEN 6 — SETTINGS (v2, with icons)
+  ════════════════════════════════════════ -->
+  <div>
+    <p class="phone-label">Settings</p>
+    <div class="phone-frame">
+      <div class="blob-b blob-pulse-dim" style="position:absolute;top:0;right:0;width:60%;height:40%;background:rgba(61,184,138,0.06);border-radius:50%;filter:blur(80px);pointer-events:none;"></div>
+      <div class="blob-c" style="position:absolute;bottom:5%;left:-10%;width:50%;height:30%;background:rgba(131,248,198,0.05);border-radius:50%;filter:blur(70px);pointer-events:none;"></div>
+      <div style="display:flex;flex-direction:column;min-height:812px;position:relative;z-index:1;">
+        <header style="display:flex;align-items:center;gap:12px;padding:56px 24px 8px;">
+          <button style="width:40px;height:40px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:20px;color:#006c4c;">arrow_back_ios</span>
+          </button>
+          <h1 style="font-size:24px;font-weight:300;letter-spacing:-0.3px;color:#006c4c;">Settings</h1>
+        </header>
+
+        <main style="flex:1;padding:12px 20px 48px;overflow-y:auto;" class="no-scrollbar">
+
+          <!-- Notifications -->
+          <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3d4a43;opacity:0.5;padding:0 4px 8px;">Notifications</p>
+          <div class="settings-card">
+            <!-- Toggle -->
+            <div class="ios-separator" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;">
+              <span style="font-size:15px;font-weight:600;color:#181d1c;">Daily reminders</span>
+              <div style="width:50px;height:28px;background:#3db88a;border-radius:100px;position:relative;">
+                <div style="position:absolute;right:3px;top:3px;width:22px;height:22px;background:white;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.15);"></div>
+              </div>
+            </div>
+            <!-- Morning -->
+            <div class="ios-separator" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#006c4c;">light_mode</span>
+                </div>
+                <span style="font-size:15px;font-weight:500;color:#181d1c;">Morning</span>
+              </div>
+              <span style="font-size:14px;font-weight:700;color:#006c4c;">9:00 AM</span>
+            </div>
+            <!-- Afternoon -->
+            <div class="ios-separator" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#006c4c;">wb_sunny</span>
+                </div>
+                <span style="font-size:15px;font-weight:500;color:#181d1c;">Afternoon</span>
+              </div>
+              <span style="font-size:14px;font-weight:700;color:#006c4c;">13:00</span>
+            </div>
+            <!-- Evening -->
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#006c4c;">dark_mode</span>
+                </div>
+                <span style="font-size:15px;font-weight:500;color:#181d1c;">Evening</span>
+              </div>
+              <span style="font-size:14px;font-weight:700;color:#006c4c;">21:30</span>
+            </div>
+          </div>
+
+          <!-- Library -->
+          <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3d4a43;opacity:0.5;padding:0 4px 8px;">Library</p>
+          <div class="settings-card">
+            <div class="ios-separator" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#f0f4f2;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#006c4c;">bookmark</span>
+                </div>
+                <span style="font-size:15px;font-weight:500;color:#181d1c;">Saved actions</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="background:rgba(61,184,138,0.15);color:#00432e;font-size:11px;font-weight:800;padding:3px 10px;border-radius:100px;">3</span>
+                <span class="material-symbols-outlined" style="font-size:16px;color:#bccac1;">chevron_right</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#f5f0f0;display:flex;align-items:center;justify-content:center;">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#9e4040;">block</span>
+                </div>
+                <span style="font-size:15px;font-weight:500;color:#58605d;">Reset dislikes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <p style="text-align:center;font-size:12px;color:#3d4a43;opacity:0.4;margin-top:8px;">Version 1.0.0</p>
+        </main>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

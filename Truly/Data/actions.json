@@ -1,0 +1,70 @@
+[
+  { "id":"read-5",       "kind":"intent", "title":"Почитай",                     "detail":"Пару страниц — и хватит.",                     "category":"reading",    "minutes":5,  "tags":["books"] },
+  { "id":"read-10",      "kind":"intent", "title":"Почитай",                     "detail":"Что-то, что тебе правда нравится.",             "category":"reading",    "minutes":10, "tags":["books","articles"] },
+  { "id":"read-20",      "kind":"intent", "title":"Почитай",                     "detail":"Один небольшой кусочек главы.",                 "category":"reading",    "minutes":20, "tags":["books"] },
+
+  { "id":"walk-5",       "kind":"intent", "title":"Прогулка",                    "detail":"Просто выйди и пройдись немного.",              "category":"body",       "minutes":5,  "tags":["move"] },
+  { "id":"walk-10",      "kind":"intent", "title":"Прогулка",                    "detail":"Десять минут на свежем воздухе.",               "category":"body",       "minutes":10, "tags":["move"] },
+  { "id":"walk-20",      "kind":"intent", "title":"Прогулка",                    "detail":"Пройдись подольше, без спешки.",                "category":"body",       "minutes":20, "tags":["move"] },
+
+  { "id":"music-10",     "kind":"intent", "title":"Музыка",                      "detail":"По одной песне — полностью.",                   "category":"calm",       "minutes":10, "tags":["calm","music"] },
+  { "id":"journal-10",   "kind":"intent", "title":"Дневник",                     "detail":"Запиши всё, что крутится в голове.",             "category":"creativity", "minutes":10, "tags":["write"] },
+
+  { "id":"shoes-10",     "kind":"card",   "title":"Почисти обувь",              "detail":"Маленькое обновление дня.",                     "category":"home",       "minutes":10, "tags":["reset"] },
+  { "id":"desk-8",       "kind":"card",   "title":"Освободи одну поверхность",  "detail":"Только одну маленькую зону.",                   "category":"home",       "minutes":8,  "tags":["reset"] },
+  { "id":"laundry-10",   "kind":"card",   "title":"Разложи вещи",              "detail":"Всего 10 минут, без давления.",                 "category":"home",       "minutes":10, "tags":["reset"] },
+  { "id":"dishes-7",     "kind":"card",   "title":"Помой пару тарелок",        "detail":"Достаточно для маленькой победы.",              "category":"home",       "minutes":7,  "tags":["reset"] },
+
+  { "id":"stretch-3",    "kind":"card",   "title":"Мягкая растяжка",           "detail":"Шея и плечи, нежно.",                           "category":"body",       "minutes":3,  "tags":["body"] },
+  { "id":"squats-2",     "kind":"card",   "title":"10 медленных приседаний",   "detail":"Спокойно и мягко.",                             "category":"body",       "minutes":2,  "tags":["body"] },
+  { "id":"posture-2",    "kind":"card",   "title":"Выпрями спину",             "detail":"Плечи вниз, челюсть расслабь.",                 "category":"body",       "minutes":2,  "tags":["body"] },
+
+  { "id":"tea-7",        "kind":"card",   "title":"Завари чай без телефона",   "detail":"Пей медленно.",                                 "category":"calm",       "minutes":7,  "tags":["calm"] },
+  { "id":"air-2",        "kind":"card",   "title":"2 минуты воздуха",          "detail":"Открой окно и подыши.",                         "category":"calm",       "minutes":2,  "tags":["breath"] },
+  { "id":"breath-3",     "kind":"card",   "title":"3 глубоких вдоха",          "detail":"Вдох… выдох… три раза.",                        "category":"calm",       "minutes":3,  "tags":["breath"] },
+  { "id":"shower-5",     "kind":"card",   "title":"Быстрый душ",              "detail":"Перезагрузка за 5 минут.",                      "category":"calm",       "minutes":5,  "tags":["reset"] },
+
+  { "id":"doodle-5",     "kind":"card",   "title":"Почиркай 5 минут",         "detail":"Без цели, просто линии.",                       "category":"creativity", "minutes":5,  "tags":["art"] },
+  { "id":"photo-5",      "kind":"card",   "title":"Сделай 5 фото",            "detail":"Найди маленькую красоту рядом.",                "category":"creativity", "minutes":5,  "tags":["art"] },
+  { "id":"tidy-5",       "kind":"card",   "title":"Прибери маленький уголок", "detail":"Один угол или одну полку.",                     "category":"home",       "minutes":5,  "tags":["reset"] },
+
+  { "id":"text-2",       "kind":"card",   "title":"Напиши приятному человеку","detail":"Тёплое маленькое сообщение.",                   "category":"social",     "minutes":2,  "tags":["social"] },
+  { "id":"hug-1",        "kind":"card",   "title":"Обними кого-то (или себя)","detail":"Одна минута мягкости.",                         "category":"social",     "minutes":1,  "tags":["social"] },
+
+  { "id":"window-5",     "kind":"card",   "title":"Посидеть у окна",           "detail":"Ничего не делай. Просто смотри.",               "category":"calm",       "minutes":5,  "tags":["calm"] },
+  { "id":"donothing-5",  "kind":"card",   "title":"Лечь и закрыть глаза",      "detail":"Без телефона. Просто полежи.",                  "category":"calm",       "minutes":5,  "tags":["calm","rest"] },
+  { "id":"gratitude-3",  "kind":"card",   "title":"Три благодарности",         "detail":"Запиши три вещи, за которые сегодня хорошо.",   "category":"calm",       "minutes":3,  "tags":["calm","write"] },
+  { "id":"candle-1",     "kind":"card",   "title":"Зажги свечу",               "detail":"Один маленький огонёк для себя.",               "category":"calm",       "minutes":1,  "tags":["calm"] },
+  { "id":"meditate-10",  "kind":"intent", "title":"Медитация",                 "detail":"10 минут с закрытыми глазами.",                 "category":"calm",       "minutes":10, "tags":["calm","breath"] },
+  { "id":"drinkwater-2", "kind":"card",   "title":"Выпить стакан воды",        "detail":"Медленно. Без телефона.",                       "category":"calm",       "minutes":2,  "tags":["calm"] },
+  { "id":"outside-3",    "kind":"card",   "title":"Выйти и постоять",          "detail":"Просто постоять на улице пару минут.",          "category":"calm",       "minutes":3,  "tags":["calm","body"] },
+  { "id":"brushteeth-3", "kind":"card",   "title":"Почистить зубы",            "detail":"Как маленький ритуал для себя.",                "category":"calm",       "minutes":3,  "tags":["calm","reset"] },
+  { "id":"sky-1",        "kind":"card",   "title":"Посмотреть на небо",        "detail":"Одну минуту — в окно или на улицу.",            "category":"calm",       "minutes":1,  "tags":["calm"] },
+
+  { "id":"shake-1",      "kind":"card",   "title":"Потрясти руками и плечами", "detail":"Сброс напряжения за одну минуту.",              "category":"body",       "minutes":1,  "tags":["body"] },
+  { "id":"coldwater-2",  "kind":"card",   "title":"Умыться холодной водой",    "detail":"Ополосни лицо — сразу легче.",                  "category":"body",       "minutes":2,  "tags":["body","reset"] },
+  { "id":"neckrub-2",    "kind":"card",   "title":"Массаж шеи и висков",       "detail":"Пальцами, медленно.",                           "category":"body",       "minutes":2,  "tags":["body"] },
+  { "id":"laydown-3",    "kind":"card",   "title":"Лечь на пол",               "detail":"Просто полежи. Пол держит.",                    "category":"body",       "minutes":3,  "tags":["body","rest"] },
+  { "id":"stretchup-1",  "kind":"card",   "title":"Потянуться вверх",          "detail":"Встань. Тянись как можно выше.",                "category":"body",       "minutes":1,  "tags":["body"] },
+  { "id":"jump-1",       "kind":"card",   "title":"10 прыжков на месте",       "detail":"Просто попрыгай. Сразу лучше.",                 "category":"body",       "minutes":1,  "tags":["body","move"] },
+  { "id":"rotate-2",     "kind":"card",   "title":"Покрутить суставы",         "detail":"Запястья, плечи, шея — по кругу.",              "category":"body",       "minutes":2,  "tags":["body"] },
+
+  { "id":"plants-3",     "kind":"card",   "title":"Полить растения",           "detail":"Они тоже живые.",                               "category":"home",       "minutes":3,  "tags":["reset"] },
+  { "id":"wipe-1",       "kind":"card",   "title":"Протереть стол и экран",    "detail":"Чистота — это уже что-то.",                     "category":"home",       "minutes":1,  "tags":["reset"] },
+  { "id":"throwone-7",   "kind":"card",   "title":"Выбросить одну вещь",       "detail":"Одну ненужную. Любую.",                         "category":"home",       "minutes":7,  "tags":["reset"] },
+  { "id":"towel-2",      "kind":"card",   "title":"Поменять полотенце",        "detail":"Свежее полотенце — маленькая радость.",          "category":"home",       "minutes":2,  "tags":["reset"] },
+  { "id":"fold-3",       "kind":"card",   "title":"Сложить одну стопку",       "detail":"Одну. Больше не нужно.",                        "category":"home",       "minutes":3,  "tags":["reset"] },
+  { "id":"under-5",      "kind":"card",   "title":"Убрать под кровать",        "detail":"Или под стол. Там что-нибудь точно есть.",       "category":"home",       "minutes":5,  "tags":["reset"] },
+
+  { "id":"onesentence-2","kind":"card",   "title":"Одно предложение о дне",    "detail":"Как ты себя чувствуешь прямо сейчас?",          "category":"creativity", "minutes":2,  "tags":["write"] },
+  { "id":"onetrack-4",   "kind":"card",   "title":"Послушать один трек",       "detail":"Ничего не делай. Просто слушай.",               "category":"creativity", "minutes":4,  "tags":["music","calm"] },
+  { "id":"oneidea-3",    "kind":"card",   "title":"Записать одну идею",        "detail":"Любую. Даже глупую.",                           "category":"creativity", "minutes":3,  "tags":["write"] },
+  { "id":"moodart-3",    "kind":"card",   "title":"Нарисовать настроение",     "detail":"Просто форма и цвет. Без смысла.",              "category":"creativity", "minutes":3,  "tags":["art"] },
+  { "id":"letter-5",     "kind":"card",   "title":"Короткое письмо себе",      "detail":"Что хочешь себе сказать прямо сейчас?",         "category":"creativity", "minutes":5,  "tags":["write"] },
+  { "id":"photobeauty-3","kind":"card",   "title":"Сфотографировать красивое", "detail":"Что-то прямо здесь. Найди.",                    "category":"creativity", "minutes":3,  "tags":["art"] },
+
+  { "id":"call-5",       "kind":"intent", "title":"Позвонить близкому",        "detail":"Просто так. Это всегда хорошо.",                "category":"social",     "minutes":5,  "tags":["social"] },
+  { "id":"howareyou-2",  "kind":"card",   "title":"Написать «как ты?»",        "detail":"Кому-то, с кем давно не было связи.",            "category":"social",     "minutes":2,  "tags":["social"] },
+  { "id":"compliment-1", "kind":"card",   "title":"Написать комплимент",       "detail":"Кому-нибудь. Прямо сейчас.",                    "category":"social",     "minutes":1,  "tags":["social"] },
+  { "id":"remember-1",   "kind":"card",   "title":"Вспомнить кого-то хорошего","detail":"Улыбнись. Это работает.",                       "category":"social",     "minutes":1,  "tags":["social"] }
+]

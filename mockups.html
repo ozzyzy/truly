@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truly — Design Mockups</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #111;
+  font-family: -apple-system, 'SF Pro Rounded', 'SF Pro Display', sans-serif;
+  padding: 48px 32px 80px;
+  color: #eee;
+  min-width: 1100px;
+}
+
+h1 { font-size:32px; font-weight:700; letter-spacing:-0.02em; margin-bottom:6px; }
+.page-sub { color:#777; font-size:15px; margin-bottom:60px; }
+.section { margin-bottom:72px; }
+.section-label {
+  font-size:11px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:#555;
+  margin-bottom:24px;
+}
+.section-title { font-size:22px; font-weight:700; margin-bottom:6px; }
+.section-desc { font-size:13px; color:#666; margin-bottom:28px; }
+
+/* ── ROW OF PHONES ── */
+.phone-row { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+.phone-col { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.screen-label { font-size:11px; color:#555; letter-spacing:.04em; }
+
+/* ── PHONE SHELL ── */
+.phone {
+  width:175px; height:360px;
+  border-radius:40px;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 0 0 1.5px #2a2a2a, 0 28px 60px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.04);
+  flex-shrink:0;
+}
+.screen {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+  padding:20px 14px;
+  gap:0;
+}
+
+/* status bar */
+.status-bar {
+  position:absolute; top:0; left:0; right:0;
+  height:32px; display:flex;
+  align-items:center; justify-content:space-between;
+  padding:0 20px; z-index:10;
+}
+.status-time { font-size:12px; font-weight:600; }
+.status-icons { font-size:11px; opacity:.6; }
+
+/* tab bar */
+.tab-bar {
+  position:absolute; bottom:0; left:0; right:0;
+  height:56px; display:flex;
+  align-items:center; justify-content:space-around;
+  padding-bottom:6px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(0,0,0,.07);
+}
+.tab-icon { font-size:10px; text-align:center; opacity:.4; }
+.tab-icon.active { opacity:1; }
+
+/* card */
+.ui-card {
+  width:100%; border-radius:20px;
+  padding:14px;
+  margin-bottom:8px;
+}
+/* button */
+.ui-btn {
+  width:100%; border-radius:14px;
+  padding:11px 0; text-align:center;
+  font-size:13px; font-weight:600;
+  margin-bottom:6px;
+}
+.ui-btn-ghost {
+  background:transparent;
+  font-size:11px; color:inherit; opacity:.5;
+  padding:6px 0; text-align:center;
+}
+/* tiny */
+.tiny { font-size:9px; opacity:.55; }
+.small { font-size:11px; }
+.med { font-size:13px; font-weight:600; }
+.big { font-size:20px; font-weight:800; }
+.huge { font-size:32px; font-weight:800; font-variant-numeric:tabular-nums; }
+
+/* ── ANIMATIONS ── */
+@keyframes breathe {
+  0%,100% { transform:scale(.95); opacity:.65; }
+  50% { transform:scale(1.08); opacity:1; }
+}
+@keyframes breathe2 {
+  0%,100% { transform:scale(.97); opacity:.5; }
+  50% { transform:scale(1.04); opacity:.85; }
+}
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+@keyframes particle {
+  0% { transform:translateY(0) scale(1); opacity:.9; }
+  100% { transform:translateY(-38px) scale(.2); opacity:0; }
+}
+.b1 { animation:breathe 3.5s ease-in-out infinite; }
+.b2 { animation:breathe2 3.5s ease-in-out infinite; animation-delay:.8s; }
+.b3 { animation:breathe 4s ease-in-out infinite; animation-delay:.3s; }
+
+/* divider */
+.vdiv { width:1px; height:36px; opacity:.12; background:currentColor; }
+
+/* ═══════════════════════════════════════════
+   THEME DEFINITIONS
+   ═══════════════════════════════════════════ */
+
+/* 1 — WARM CLEAN (current) */
+.t1 { --bg:#faf8f6; --card:#ffffff; --card2:#f4f0eb; --p:#211d1b; --s:#857065; --a:#ee9d6e; --a2:#5fa882; --bdr:rgba(0,0,0,.07); }
+.t1 .screen { background:radial-gradient(ellipse 80% 60% at 20% 15%, rgba(238,157,110,.22), transparent), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(95,168,130,.16), transparent), #faf8f6; }
+.t1 .status-time, .t1 .status-icons { color:#211d1b; }
+.t1 .tab-bar { background:rgba(250,248,246,.88); border-top:1px solid rgba(0,0,0,.07); }
+
+/* 2 — CREAM & TERRA */
+.t2 { --bg:#f5ede3; --card:#fff8f2; --card2:#ede0d4; --p:#2a1f18; --s:#8a6a58; --a:#d97048; --a2:#8a9e6a; --bdr:rgba(0,0,0,.07); }
+.t2 .screen { background:radial-gradient(ellipse 80% 60% at 20% 15%, rgba(217,112,72,.25), transparent), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(138,158,106,.18), transparent), #f5ede3; }
+.t2 .status-time, .t2 .status-icons { color:#2a1f18; }
+.t2 .tab-bar { background:rgba(245,237,227,.88); border-top:1px solid rgba(0,0,0,.07); }
+
+/* 3 — MIST & SLATE */
+.t3 { --bg:#f2f4f5; --card:#ffffff; --card2:#e8eced; --p:#1c2226; --s:#6a7a83; --a:#5b9ecc; --a2:#7ab89a; --bdr:rgba(0,0,0,.07); }
+.t3 .screen { background:radial-gradient(ellipse 80% 60% at 20% 15%, rgba(91,158,204,.18), transparent), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(122,184,154,.14), transparent), #f2f4f5; }
+.t3 .status-time, .t3 .status-icons { color:#1c2226; }
+.t3 .tab-bar { background:rgba(242,244,245,.88); border-top:1px solid rgba(0,0,0,.07); }
+
+/* 4 — LILAC & SAND */
+.t4 { --bg:#f6f3f9; --card:#ffffff; --card2:#ede8f4; --p:#221b2f; --s:#7a6a94; --a:#a47fc7; --a2:#c4a87a; --bdr:rgba(0,0,0,.07); }
+.t4 .screen { background:radial-gradient(ellipse 80% 60% at 20% 15%, rgba(164,127,199,.2), transparent), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(196,168,122,.15), transparent), #f6f3f9; }
+.t4 .status-time, .t4 .status-icons { color:#221b2f; }
+.t4 .tab-bar { background:rgba(246,243,249,.88); border-top:1px solid rgba(0,0,0,.07); }
+
+/* shared card/button using CSS vars */
+.c-card { background:var(--card); border:1px solid var(--bdr); border-radius:20px; padding:14px; width:100%; margin-bottom:8px; box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.c-card2 { background:var(--card2); border-radius:16px; padding:12px; width:100%; margin-bottom:6px; }
+.c-btn-p { background:var(--a); border-radius:14px; padding:11px 0; width:100%; text-align:center; font-size:13px; font-weight:600; color:var(--p); margin-bottom:6px; }
+.c-btn-s { background:var(--card2); border:1px solid var(--bdr); border-radius:14px; padding:11px 0; width:100%; text-align:center; font-size:12px; font-weight:500; color:var(--p); margin-bottom:6px; }
+.c-p { color:var(--p); }
+.c-s { color:var(--s); }
+.c-a { color:var(--a); }
+.c-a2 { color:var(--a2); }
+.c-vdiv { width:1px; height:36px; background:var(--p); opacity:.1; }
+</style>
+</head>
+<body>
+
+<h1>Truly — Design Mockups</h1>
+<p class="page-sub">Цветовые схемы × все экраны × иконки</p>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 1: ICONS
+════════════════════════════════════════════════════ -->
+<div class="section">
+<div class="section-label">Иконка</div>
+<div class="section-title">T + росток — варианты</div>
+<div class="section-desc">Буква T в разных трактовках. Выбери направление.</div>
+
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end;">
+
+  <!-- ICON 1: T минималист -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="width:100px;height:100px;border-radius:24px;background:#faf8f6;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.35);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 25%, rgba(238,157,110,.25), transparent 60%);"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+        <span style="font-size:46px;font-weight:800;color:#211d1b;line-height:.9;letter-spacing:-.02em;font-family:-apple-system,sans-serif;">T</span>
+        <div style="width:2px;height:10px;background:#5fa882;border-radius:2px;margin-top:1px;"></div>
+        <div style="display:flex;gap:5px;margin-top:-1px;">
+          <div style="width:7px;height:6px;border-radius:50% 0 50% 50%;background:#5fa882;transform:rotate(-20deg);"></div>
+          <div style="width:7px;height:6px;border-radius:0 50% 50% 50%;background:#5fa882;transform:rotate(20deg);"></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center;">A — Минимал<br><span style="color:#888;font-size:10px;">T + стебель + листья</span></div>
+  </div>
+
+  <!-- ICON 2: T в круге -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="width:100px;height:100px;border-radius:24px;background:#faf8f6;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.35);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 25%, rgba(238,157,110,.25), transparent 60%);"></div>
+      <div style="width:70px;height:70px;border-radius:50%;background:linear-gradient(145deg,#ee9d6e,#e8835a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(232,131,90,.4);position:relative;z-index:1;">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <span style="font-size:36px;font-weight:800;color:white;line-height:.85;letter-spacing:-.02em;">T</span>
+          <div style="width:2px;height:7px;background:rgba(255,255,255,.8);border-radius:1px;margin-top:1px;"></div>
+          <div style="display:flex;gap:4px;">
+            <div style="width:5px;height:5px;border-radius:50% 0 50% 50%;background:rgba(255,255,255,.8);transform:rotate(-20deg);"></div>
+            <div style="width:5px;height:5px;border-radius:0 50% 50% 50%;background:rgba(255,255,255,.8);transform:rotate(20deg);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center;">B — Круг<br><span style="color:#888;font-size:10px;">T в персиковом круге</span></div>
+  </div>
+
+  <!-- ICON 3: T росток вверх -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="width:100px;height:100px;border-radius:24px;background:linear-gradient(145deg,#fef9f5,#f5ede3);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.35);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(238,157,110,.3), transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(95,168,130,.2), transparent 50%);"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+        <!-- росток сверху T -->
+        <div style="display:flex;gap:3px;margin-bottom:0px;">
+          <div style="width:6px;height:5px;border-radius:50% 50% 0 50%;background:#5fa882;transform:rotate(-15deg);margin-top:4px;"></div>
+          <div style="width:2px;height:14px;background:#5fa882;border-radius:2px;"></div>
+          <div style="width:6px;height:5px;border-radius:50% 50% 50% 0;background:#5fa882;transform:rotate(15deg);margin-top:4px;"></div>
+        </div>
+        <span style="font-size:44px;font-weight:800;color:#211d1b;line-height:.95;letter-spacing:-.02em;font-family:-apple-system,sans-serif;">T</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center;">C — Росток из T ✦<br><span style="color:#888;font-size:10px;">росток растёт из буквы</span></div>
+  </div>
+
+  <!-- ICON 4: Rounded bold -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="width:100px;height:100px;border-radius:24px;background:linear-gradient(145deg,#211d1b,#3a2f2a);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.45);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(238,157,110,.35), transparent 55%);"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+        <span style="font-size:46px;font-weight:800;color:#faf8f6;line-height:.9;letter-spacing:-.02em;font-family:-apple-system,sans-serif;">T</span>
+        <div style="width:2px;height:9px;background:#ee9d6e;border-radius:2px;margin-top:2px;"></div>
+        <div style="display:flex;gap:5px;margin-top:-1px;">
+          <div style="width:7px;height:5px;border-radius:50% 0 50% 50%;background:#5fa882;transform:rotate(-20deg);"></div>
+          <div style="width:7px;height:5px;border-radius:0 50% 50% 50%;background:#5fa882;transform:rotate(20deg);"></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center;">D — Тёмная<br><span style="color:#888;font-size:10px;">как у Notion/Things</span></div>
+  </div>
+
+  <!-- ICON 5: round soft -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="width:100px;height:100px;border-radius:24px;background:linear-gradient(145deg,#f6f3f9,#ede8f4);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.35);position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(164,127,199,.3), transparent 55%);"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+        <span style="font-size:46px;font-weight:800;color:#221b2f;line-height:.9;letter-spacing:-.02em;font-family:-apple-system,sans-serif;">T</span>
+        <div style="width:2px;height:9px;background:#7ab89a;border-radius:2px;margin-top:2px;"></div>
+        <div style="display:flex;gap:5px;margin-top:-1px;">
+          <div style="width:7px;height:5px;border-radius:50% 0 50% 50%;background:#7ab89a;transform:rotate(-20deg);"></div>
+          <div style="width:7px;height:5px;border-radius:0 50% 50% 50%;background:#7ab89a;transform:rotate(20deg);"></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#555;text-align:center;">E — Лиловая<br><span style="color:#888;font-size:10px;">под схему Lilac</span></div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 2: COLOR SCHEMES
+════════════════════════════════════════════════════ -->
+<div class="section">
+<div class="section-label">Цветовые схемы</div>
+<div class="section-title">4 направления — все экраны</div>
+<div class="section-desc">Каждая схема показана на 4 экранах: Главный · Карточка · Таймер · Done</div>
+
+<!-- ────── SCHEME 1: WARM CLEAN ────── -->
+<div style="margin-bottom:56px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+  <div style="width:14px;height:14px;border-radius:50%;background:#ee9d6e;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#5fa882;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#faf8f6;border:1px solid #333;"></div>
+  <span style="font-size:16px;font-weight:700;">1 — Warm Clean</span>
+  <span style="font-size:12px;color:#555;margin-left:4px;">текущая / рекомендуем</span>
+  <div style="background:#ee9d6e;color:#211d1b;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:4px;">CURRENT</div>
+</div>
+
+<div class="phone-row">
+
+<!-- HOME -->
+<div class="phone-col">
+  <div class="phone t1">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span><span class="status-icons">●●● ▲</span></div>
+
+      <div style="height:32px;"></div>
+      <!-- breathing logo -->
+      <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <div class="b1" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(238,157,110,.18);filter:blur(8px);"></div>
+        <div class="b2" style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(95,168,130,.12);filter:blur(14px);"></div>
+        <span style="font-size:28px;font-weight:800;color:#211d1b;font-family:-apple-system,sans-serif;position:relative;z-index:1;">Truly</span>
+      </div>
+
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:10px;color:#857065;margin-bottom:3px;">На этой неделе ты вернул себе</div>
+        <div style="font-size:22px;font-weight:800;color:#211d1b;line-height:1;">1 ч 14 мин</div>
+        <div style="font-size:10px;color:#857065;margin-top:2px;">Сегодня: 22 мин</div>
+      </div>
+
+      <div class="c-card t1" style="margin-bottom:0;">
+        <div class="c-btn-p t1" style="margin-bottom:6px;">Предложи что-то</div>
+        <div class="c-btn-s t1">Я хочу…</div>
+      </div>
+
+      <div class="tab-bar">
+        <div class="tab-icon active c-a t1" style="font-size:9px;">✦ Truly</div>
+        <div class="tab-icon" style="color:#857065;font-size:9px;">⬛ Stats</div>
+        <div class="tab-icon" style="color:#857065;font-size:9px;">♡ Library</div>
+        <div class="tab-icon" style="color:#857065;font-size:9px;">⚙ Settings</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Главный</div>
+</div>
+
+<!-- CARD -->
+<div class="phone-col">
+  <div class="phone t1">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span><span class="status-icons">●●● ▲</span></div>
+      <div style="height:32px;"></div>
+
+      <div class="c-card t1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:8px;background:rgba(238,157,110,.2);display:flex;align-items:center;justify-content:center;font-size:12px;color:#ee9d6e;">⌂</div>
+          <div style="font-size:15px;font-weight:700;color:#211d1b;">Полить растения</div>
+        </div>
+        <div style="font-size:11px;color:#857065;margin-bottom:8px;">Они тоже живые.</div>
+        <div style="font-size:12px;font-weight:600;color:#211d1b;">3 мин</div>
+      </div>
+
+      <div class="c-card t1" style="margin-bottom:0;">
+        <div class="c-btn-p t1">Старт</div>
+        <div class="c-btn-s t1">Не сейчас</div>
+        <div style="background:rgba(244,240,235,.8);border-radius:12px;padding:9px;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:6px;">
+          <span style="font-size:11px;color:#857065;">♡ Нравится</span>
+        </div>
+        <div style="text-align:center;font-size:10px;color:#b0a098;padding:4px;">Не показывать это</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Карточка</div>
+</div>
+
+<!-- TIMER -->
+<div class="phone-col">
+  <div class="phone t1">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span><span class="status-icons">●●● ▲</span></div>
+      <div style="height:32px;"></div>
+
+      <div style="font-size:12px;font-weight:500;color:#857065;margin-bottom:16px;text-align:center;">Полить растения</div>
+
+      <div style="position:relative;width:144px;height:144px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+        <div class="b1" style="position:absolute;width:144px;height:144px;border-radius:50%;background:rgba(238,157,110,.18);"></div>
+        <div class="b2" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(238,157,110,.24);"></div>
+        <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:1.5px solid rgba(238,157,110,.35);"></div>
+        <div style="text-align:center;position:relative;z-index:1;">
+          <div style="font-size:30px;font-weight:800;color:#211d1b;font-variant-numeric:tabular-nums;">03:00</div>
+        </div>
+      </div>
+
+      <div class="c-btn-p t1" style="width:147px;">Закончить</div>
+    </div>
+  </div>
+  <div class="screen-label">Таймер ✦</div>
+</div>
+
+<!-- DONE -->
+<div class="phone-col">
+  <div class="phone t1">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:44</span><span class="status-icons">●●● ▲</span></div>
+      <div style="height:24px;"></div>
+
+      <div style="font-size:36px;color:#ee9d6e;margin-bottom:14px;">✦</div>
+      <div style="font-size:19px;font-weight:800;color:#211d1b;text-align:center;margin-bottom:5px;">Ты выбрал себя</div>
+      <div style="font-size:11px;color:#857065;text-align:center;margin-bottom:18px;">+3 минуты обратно в твою жизнь</div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px;width:147px;box-shadow:0 2px 16px rgba(0,0,0,.07);">
+        <div style="font-size:10px;color:#857065;text-align:center;margin-bottom:12px;">ты вернул себе</div>
+        <div style="display:flex;align-items:center;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:17px;font-weight:800;color:#211d1b;">22 мин</div>
+            <div style="font-size:9px;color:#857065;">сегодня</div>
+          </div>
+          <div style="width:1px;height:32px;background:rgba(0,0,0,.08);"></div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:17px;font-weight:800;color:#211d1b;">1 ч 14 м</div>
+            <div style="font-size:9px;color:#857065;">за неделю</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Done</div>
+</div>
+
+</div></div><!-- END SCHEME 1 -->
+
+
+<!-- ────── SCHEME 2: CREAM & TERRA ────── -->
+<div style="margin-bottom:56px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+  <div style="width:14px;height:14px;border-radius:50%;background:#d97048;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#8a9e6a;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#f5ede3;border:1px solid #333;"></div>
+  <span style="font-size:16px;font-weight:700;">2 — Cream & Terra</span>
+  <span style="font-size:12px;color:#555;margin-left:4px;">теплее, насыщеннее</span>
+</div>
+<div class="phone-row">
+
+<!-- HOME -->
+<div class="phone-col">
+  <div class="phone t2">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span><span class="status-icons">●●● ▲</span></div>
+      <div style="height:32px;"></div>
+      <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <div class="b1" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(217,112,72,.2);filter:blur(8px);"></div>
+        <div class="b2" style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(138,158,106,.14);filter:blur(14px);"></div>
+        <span style="font-size:28px;font-weight:800;color:#2a1f18;position:relative;z-index:1;">Truly</span>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:10px;color:#8a6a58;margin-bottom:3px;">На этой неделе ты вернул себе</div>
+        <div style="font-size:22px;font-weight:800;color:#2a1f18;">1 ч 14 мин</div>
+        <div style="font-size:10px;color:#8a6a58;margin-top:2px;">Сегодня: 22 мин</div>
+      </div>
+      <div style="background:#fff8f2;border:1px solid rgba(0,0,0,.07);border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#d97048;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff8f2;margin-bottom:6px;">Предложи что-то</div>
+        <div style="background:#ede0d4;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#2a1f18;">Я хочу…</div>
+      </div>
+      <div class="tab-bar t2">
+        <div style="font-size:9px;color:#d97048;font-weight:600;">✦ Truly</div>
+        <div style="font-size:9px;color:#8a6a58;">⬛ Stats</div>
+        <div style="font-size:9px;color:#8a6a58;">♡ Library</div>
+        <div style="font-size:9px;color:#8a6a58;">⚙</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Главный</div>
+</div>
+
+<!-- CARD -->
+<div class="phone-col">
+  <div class="phone t2">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="background:#fff8f2;border-radius:20px;padding:14px;width:147px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:8px;background:rgba(217,112,72,.18);display:flex;align-items:center;justify-content:center;font-size:11px;color:#d97048;">☀</div>
+          <div style="font-size:15px;font-weight:700;color:#2a1f18;">Выйти и постоять</div>
+        </div>
+        <div style="font-size:11px;color:#8a6a58;margin-bottom:8px;">Просто постоять на улице пару минут.</div>
+        <div style="font-size:12px;font-weight:600;color:#2a1f18;">3 мин</div>
+      </div>
+      <div style="background:#fff8f2;border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#d97048;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff8f2;margin-bottom:6px;">Старт</div>
+        <div style="background:#ede0d4;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#2a1f18;margin-bottom:6px;">Не сейчас</div>
+        <div style="text-align:center;font-size:10px;color:#b09080;padding:4px;">Не показывать это</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Карточка</div>
+</div>
+
+<!-- TIMER -->
+<div class="phone-col">
+  <div class="phone t2">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="font-size:12px;color:#8a6a58;margin-bottom:16px;">Выйти и постоять</div>
+      <div style="position:relative;width:144px;height:144px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+        <div class="b1" style="position:absolute;width:144px;height:144px;border-radius:50%;background:rgba(217,112,72,.18);"></div>
+        <div class="b2" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(217,112,72,.24);"></div>
+        <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:1.5px solid rgba(217,112,72,.35);"></div>
+        <div style="font-size:30px;font-weight:800;color:#2a1f18;font-variant-numeric:tabular-nums;position:relative;z-index:1;">03:00</div>
+      </div>
+      <div style="background:#d97048;border-radius:14px;padding:11px 0;width:147px;text-align:center;font-size:13px;font-weight:600;color:#fff8f2;">Закончить</div>
+    </div>
+  </div>
+  <div class="screen-label">Таймер</div>
+</div>
+
+<!-- DONE -->
+<div class="phone-col">
+  <div class="phone t2">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:44</span></div>
+      <div style="height:24px;"></div>
+      <div style="font-size:34px;color:#d97048;margin-bottom:14px;">✦</div>
+      <div style="font-size:19px;font-weight:800;color:#2a1f18;margin-bottom:5px;">Ты выбрал себя</div>
+      <div style="font-size:11px;color:#8a6a58;margin-bottom:18px;text-align:center;">+3 минуты обратно в твою жизнь</div>
+      <div style="background:#fff8f2;border-radius:20px;padding:16px;width:147px;box-shadow:0 2px 14px rgba(0,0,0,.07);">
+        <div style="font-size:10px;color:#8a6a58;text-align:center;margin-bottom:12px;">ты вернул себе</div>
+        <div style="display:flex;align-items:center;">
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#2a1f18;">22 мин</div><div style="font-size:9px;color:#8a6a58;">сегодня</div></div>
+          <div style="width:1px;height:32px;background:rgba(0,0,0,.08);"></div>
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#2a1f18;">1 ч 14 м</div><div style="font-size:9px;color:#8a6a58;">за неделю</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Done</div>
+</div>
+</div></div><!-- END SCHEME 2 -->
+
+
+<!-- ────── SCHEME 3: MIST & SLATE ────── -->
+<div style="margin-bottom:56px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+  <div style="width:14px;height:14px;border-radius:50%;background:#5b9ecc;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#7ab89a;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#f2f4f5;border:1px solid #333;"></div>
+  <span style="font-size:16px;font-weight:700;">3 — Mist & Slate</span>
+  <span style="font-size:12px;color:#555;margin-left:4px;">свежее, прохладнее</span>
+</div>
+<div class="phone-row">
+
+<!-- HOME -->
+<div class="phone-col">
+  <div class="phone t3">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <div class="b1" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(91,158,204,.2);filter:blur(8px);"></div>
+        <div class="b2" style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(122,184,154,.14);filter:blur(14px);"></div>
+        <span style="font-size:28px;font-weight:800;color:#1c2226;position:relative;z-index:1;">Truly</span>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:10px;color:#6a7a83;margin-bottom:3px;">На этой неделе ты вернул себе</div>
+        <div style="font-size:22px;font-weight:800;color:#1c2226;">1 ч 14 мин</div>
+        <div style="font-size:10px;color:#6a7a83;margin-top:2px;">Сегодня: 22 мин</div>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#5b9ecc;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">Предложи что-то</div>
+        <div style="background:#e8eced;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#1c2226;">Я хочу…</div>
+      </div>
+      <div class="tab-bar t3">
+        <div style="font-size:9px;color:#5b9ecc;font-weight:600;">✦ Truly</div>
+        <div style="font-size:9px;color:#6a7a83;">⬛</div>
+        <div style="font-size:9px;color:#6a7a83;">♡</div>
+        <div style="font-size:9px;color:#6a7a83;">⚙</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Главный</div>
+</div>
+
+<!-- CARD -->
+<div class="phone-col">
+  <div class="phone t3">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="background:#fff;border-radius:20px;padding:14px;width:147px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:8px;background:rgba(91,158,204,.15);display:flex;align-items:center;justify-content:center;font-size:11px;color:#5b9ecc;">♦</div>
+          <div style="font-size:15px;font-weight:700;color:#1c2226;">3 глубоких вдоха</div>
+        </div>
+        <div style="font-size:11px;color:#6a7a83;margin-bottom:8px;">Вдох… выдох… три раза.</div>
+        <div style="font-size:12px;font-weight:600;color:#1c2226;">3 мин</div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#5b9ecc;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">Старт</div>
+        <div style="background:#e8eced;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#1c2226;margin-bottom:6px;">Не сейчас</div>
+        <div style="text-align:center;font-size:10px;color:#9aabb5;padding:4px;">Не показывать это</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Карточка</div>
+</div>
+
+<!-- TIMER -->
+<div class="phone-col">
+  <div class="phone t3">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="font-size:12px;color:#6a7a83;margin-bottom:16px;">3 глубоких вдоха</div>
+      <div style="position:relative;width:144px;height:144px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+        <div class="b1" style="position:absolute;width:144px;height:144px;border-radius:50%;background:rgba(91,158,204,.15);"></div>
+        <div class="b2" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(91,158,204,.22);"></div>
+        <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:1.5px solid rgba(91,158,204,.3);"></div>
+        <div style="font-size:30px;font-weight:800;color:#1c2226;font-variant-numeric:tabular-nums;position:relative;z-index:1;">03:00</div>
+      </div>
+      <div style="background:#5b9ecc;border-radius:14px;padding:11px 0;width:147px;text-align:center;font-size:13px;font-weight:600;color:#fff;">Закончить</div>
+    </div>
+  </div>
+  <div class="screen-label">Таймер</div>
+</div>
+
+<!-- DONE -->
+<div class="phone-col">
+  <div class="phone t3">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:44</span></div>
+      <div style="height:24px;"></div>
+      <div style="font-size:34px;color:#5b9ecc;margin-bottom:14px;">✦</div>
+      <div style="font-size:19px;font-weight:800;color:#1c2226;margin-bottom:5px;">Ты выбрал себя</div>
+      <div style="font-size:11px;color:#6a7a83;margin-bottom:18px;text-align:center;">+3 минуты обратно в твою жизнь</div>
+      <div style="background:#fff;border-radius:20px;padding:16px;width:147px;box-shadow:0 2px 14px rgba(0,0,0,.06);">
+        <div style="font-size:10px;color:#6a7a83;text-align:center;margin-bottom:12px;">ты вернул себе</div>
+        <div style="display:flex;align-items:center;">
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#1c2226;">22 мин</div><div style="font-size:9px;color:#6a7a83;">сегодня</div></div>
+          <div style="width:1px;height:32px;background:rgba(0,0,0,.08);"></div>
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#1c2226;">1 ч 14 м</div><div style="font-size:9px;color:#6a7a83;">за неделю</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Done</div>
+</div>
+</div></div><!-- END SCHEME 3 -->
+
+
+<!-- ────── SCHEME 4: LILAC & SAND ────── -->
+<div style="margin-bottom:8px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+  <div style="width:14px;height:14px;border-radius:50%;background:#a47fc7;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#c4a87a;"></div>
+  <div style="width:14px;height:14px;border-radius:50%;background:#f6f3f9;border:1px solid #333;"></div>
+  <span style="font-size:16px;font-weight:700;">4 — Lilac & Sand</span>
+  <span style="font-size:12px;color:#555;margin-left:4px;">мягкий, wellness-направление</span>
+</div>
+<div class="phone-row">
+
+<!-- HOME -->
+<div class="phone-col">
+  <div class="phone t4">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;">
+        <div class="b1" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(164,127,199,.22);filter:blur(8px);"></div>
+        <div class="b2" style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(196,168,122,.14);filter:blur(14px);"></div>
+        <span style="font-size:28px;font-weight:800;color:#221b2f;position:relative;z-index:1;">Truly</span>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:10px;color:#7a6a94;margin-bottom:3px;">На этой неделе ты вернул себе</div>
+        <div style="font-size:22px;font-weight:800;color:#221b2f;">1 ч 14 мин</div>
+        <div style="font-size:10px;color:#7a6a94;margin-top:2px;">Сегодня: 22 мин</div>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#a47fc7;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">Предложи что-то</div>
+        <div style="background:#ede8f4;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#221b2f;">Я хочу…</div>
+      </div>
+      <div class="tab-bar t4">
+        <div style="font-size:9px;color:#a47fc7;font-weight:600;">✦ Truly</div>
+        <div style="font-size:9px;color:#7a6a94;">⬛</div>
+        <div style="font-size:9px;color:#7a6a94;">♡</div>
+        <div style="font-size:9px;color:#7a6a94;">⚙</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Главный</div>
+</div>
+
+<!-- CARD -->
+<div class="phone-col">
+  <div class="phone t4">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="background:#fff;border-radius:20px;padding:14px;width:147px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div style="width:22px;height:22px;border-radius:8px;background:rgba(164,127,199,.18);display:flex;align-items:center;justify-content:center;font-size:11px;color:#a47fc7;">♡</div>
+          <div style="font-size:15px;font-weight:700;color:#221b2f;">Короткое письмо себе</div>
+        </div>
+        <div style="font-size:11px;color:#7a6a94;margin-bottom:8px;">Что хочешь себе сказать прямо сейчас?</div>
+        <div style="font-size:12px;font-weight:600;color:#221b2f;">5 мин</div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:14px;width:147px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+        <div style="background:#a47fc7;border-radius:14px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">Старт</div>
+        <div style="background:#ede8f4;border-radius:14px;padding:10px 0;text-align:center;font-size:12px;color:#221b2f;margin-bottom:6px;">Не сейчас</div>
+        <div style="text-align:center;font-size:10px;color:#b0a8c4;padding:4px;">Не показывать это</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Карточка</div>
+</div>
+
+<!-- TIMER -->
+<div class="phone-col">
+  <div class="phone t4">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:41</span></div>
+      <div style="height:32px;"></div>
+      <div style="font-size:12px;color:#7a6a94;margin-bottom:16px;">Короткое письмо себе</div>
+      <div style="position:relative;width:144px;height:144px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+        <div class="b1" style="position:absolute;width:144px;height:144px;border-radius:50%;background:rgba(164,127,199,.18);"></div>
+        <div class="b2" style="position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(164,127,199,.25);"></div>
+        <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:1.5px solid rgba(164,127,199,.35);"></div>
+        <div style="font-size:30px;font-weight:800;color:#221b2f;font-variant-numeric:tabular-nums;position:relative;z-index:1;">05:00</div>
+      </div>
+      <div style="background:#a47fc7;border-radius:14px;padding:11px 0;width:147px;text-align:center;font-size:13px;font-weight:600;color:#fff;">Закончить</div>
+    </div>
+  </div>
+  <div class="screen-label">Таймер</div>
+</div>
+
+<!-- DONE -->
+<div class="phone-col">
+  <div class="phone t4">
+    <div class="screen">
+      <div class="status-bar"><span class="status-time">9:46</span></div>
+      <div style="height:24px;"></div>
+      <div style="font-size:34px;color:#a47fc7;margin-bottom:14px;">✦</div>
+      <div style="font-size:19px;font-weight:800;color:#221b2f;margin-bottom:5px;">Ты выбрал себя</div>
+      <div style="font-size:11px;color:#7a6a94;margin-bottom:18px;text-align:center;">+5 минут обратно в твою жизнь</div>
+      <div style="background:#fff;border-radius:20px;padding:16px;width:147px;box-shadow:0 2px 14px rgba(0,0,0,.06);">
+        <div style="font-size:10px;color:#7a6a94;text-align:center;margin-bottom:12px;">ты вернул себе</div>
+        <div style="display:flex;align-items:center;">
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#221b2f;">27 мин</div><div style="font-size:9px;color:#7a6a94;">сегодня</div></div>
+          <div style="width:1px;height:32px;background:rgba(0,0,0,.08);"></div>
+          <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:800;color:#221b2f;">1 ч 19 м</div><div style="font-size:9px;color:#7a6a94;">за неделю</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Done</div>
+</div>
+</div></div><!-- END SCHEME 4 -->
+
+</div><!-- END COLOR SCHEMES SECTION -->
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<div style="margin-top:48px;padding-top:24px;border-top:1px solid #222;color:#444;font-size:12px;">
+  Truly Design Mockups — скажи какую схему и иконку берём, закодируем
+</div>
+
+</body>
+</html>

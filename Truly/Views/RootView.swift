@@ -13,5 +13,9 @@ struct RootView: View {
                 }
                 .environment(\.trulyTheme, .mint)
             }
+            .onOpenURL { url in
+                guard url.scheme == "truly", url.host == "shuffle" else { return }
+                NotificationCenter.default.post(name: .trulyOpenSuggestion, object: nil)
+            }
     }
 }

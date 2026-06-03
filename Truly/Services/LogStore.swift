@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import WidgetKit
 final class LogStore: ObservableObject {
     @Published private(set) var logs: [ActionLog] = []
 
@@ -8,6 +9,13 @@ final class LogStore: ObservableObject {
 
     var totalMinutes: Int {
         logs.reduce(0) { $0 + $1.completedMinutes }
+    }
+
+    var weeklyMinutes: Int {
+        let weekStart = Calendar.current.dateInterval(of: .weekOfYear, for: Date())?.start ?? Date()
+        return logs
+            .filter { $0.completedAt >= weekStart }
+            .reduce(0) { $0 + $1.completedMinutes }
     }
 
     var milestoneOneHourShown: Bool {
@@ -20,6 +28,15 @@ final class LogStore: ObservableObject {
     func add(_ log: ActionLog) {
         logs.insert(log, at: 0)
         save()
+        syncSharedTotal()
+    }
+
+    func syncSharedTotal() {
+        let weekStart = Calendar.current.dateInterval(of: .weekOfYear, for: Date())?.start ?? Date()
+        SharedDefaults.shared.set(totalMinutes,  forKey: SharedDefaults.Keys.totalMinutes)
+        SharedDefaults.shared.set(weeklyMinutes, forKey: SharedDefaults.Keys.weeklyMinutes)
+        SharedDefaults.shared.set(weekStart,     forKey: SharedDefaults.Keys.weekStartDate)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func load() {

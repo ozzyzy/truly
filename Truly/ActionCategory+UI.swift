@@ -49,7 +49,6 @@ struct CategoryIcon: View {
     var body: some View {
         Canvas { ctx, canvasSize in
             let s = canvasSize.width / 20   // scale from 20×20 viewBox
-            ctx.translateBy(x: 0, y: 0)
 
             var path = Path()
             switch category {
@@ -86,11 +85,10 @@ struct CategoryIcon: View {
                     control2: CGPoint(x: 16*s, y: 3*s)
                 )
                 // stars
-                let starCtx = ctx
                 var star1 = Path(); star1.move(to: CGPoint(x: 15*s, y: 6*s)); star1.addLine(to: CGPoint(x: 15.3*s, y: 6.8*s)); star1.addLine(to: CGPoint(x: 16*s, y: 6*s)); star1.addLine(to: CGPoint(x: 15.3*s, y: 5.2*s)); star1.closeSubpath()
-                starCtx.fill(star1, with: .foreground)
+                ctx.fill(star1, with: .foreground)
                 var star2 = Path(); star2.move(to: CGPoint(x: 16*s, y: 9.5*s)); star2.addLine(to: CGPoint(x: 16.2*s, y: 10*s)); star2.addLine(to: CGPoint(x: 16.8*s, y: 9.5*s)); star2.addLine(to: CGPoint(x: 16.2*s, y: 9*s)); star2.closeSubpath()
-                starCtx.fill(star2, with: .foreground)
+                ctx.fill(star2, with: .foreground)
 
             case .reading:
                 // Open book

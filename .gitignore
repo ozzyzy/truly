@@ -35,3 +35,4 @@ fastlane/test_output
 *.pem
 *.p12
 AuthKey_*.p8
+.claude/

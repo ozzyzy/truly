@@ -2,8 +2,8 @@ import SwiftUI
 
 struct HomeView: View {
 
-    private let catalog = CatalogService().loadActions()
-    private let engine  = SuggestionEngine()
+    private let catalog = CatalogService.shared.actions  // loaded once, never re-read from disk
+    private let engine  = SuggestionEngine()              // stateless, cheap to create
 
     @Environment(\.trulyTheme) private var theme
     @EnvironmentObject private var preferenceStore: PreferenceStore
@@ -31,7 +31,18 @@ struct HomeView: View {
     @Namespace private var cardNamespace
 
     // First launch gift
-    @AppStorage("hasSeenFirstCard") private var hasSeenFirstCard = false
+    @AppStorage("hasSeenFirstCard")  private var hasSeenFirstCard    = false
+    @AppStorage("nudgeWindowIds")    private var nudgeWindowIdsString = "morning,afternoon,evening"
+
+    private let notifier = NotificationService()
+
+    // MARK: – Nudge reschedule
+
+    private func rescheduleNudges(lastSession: Date?) async {
+        let selected = NudgeWindow.TimeOfDay.from(string: nudgeWindowIdsString)
+        let ws = NudgeWindow.defaults.filter { selected.contains($0.timeOfDay) }
+        await notifier.scheduleDailyNudges(windows: ws, lastSessionAt: lastSession)
+    }
 
     // MARK: – Stats
 
@@ -227,7 +238,9 @@ struct HomeView: View {
                             completedAt: Date()
                         ))
                         let isMilestone = logStore.totalMinutes >= 60 && !logStore.milestoneOneHourShown
+                        if isMilestone { logStore.milestoneOneHourShown = true }
                         path.append(HomeRoute.done(minutes, isMilestone))
+                        Task { await rescheduleNudges(lastSession: Date()) }
                     }
                     .navigationTransition(.zoom(sourceID: "actionCard", in: cardNamespace))
 

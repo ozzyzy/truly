@@ -8,7 +8,7 @@ struct LibraryView: View {
 
     var onSelect: ((ActionItem) -> Void)? = nil
 
-    private let catalog = CatalogService().loadActions()
+    private let catalog = CatalogService.shared.actions
 
     private let categories: [ActionCategory] = [
         .body, .calm, .reading, .creativity, .home, .social

@@ -5,25 +5,15 @@ struct SettingsView: View {
     @Environment(\.trulyTheme) private var theme
     @EnvironmentObject private var preferenceStore: PreferenceStore
 
-    @AppStorage("nudgeHours")      private var nudgeHoursString: String = "9,13,21"
-    @AppStorage("screenThreshold") private var screenThreshold: Int = 30
+    @AppStorage("nudgeWindowIds") private var nudgeWindowIdsString: String = "morning,afternoon,evening"
+
+    @EnvironmentObject private var logStore: LogStore
 
     private let notifier = NotificationService()
+    private let windows  = NudgeWindow.defaults
 
-    private let windows: [(id: Int, icon: String, label: String, sublabel: String)] = [
-        (9,  "sunrise",    "Утро",  "когда день только начинается"),
-        (13, "sun.max",    "День",  "в середине всего"),
-        (21, "moon.stars", "Вечер", "перед тем как уснуть"),
-    ]
-
-    private let thresholdOptions: [(Int, String)] = [
-        (15, "минут"),
-        (30, "минут"),
-        (60, "минут"),
-    ]
-
-    private var selectedHours: Set<Int> {
-        Set(nudgeHoursString.split(separator: ",").compactMap { Int($0) })
+    private var selectedWindows: Set<NudgeWindow.TimeOfDay> {
+        NudgeWindow.TimeOfDay.from(string: nudgeWindowIdsString)
     }
 
     var body: some View {
@@ -33,22 +23,10 @@ struct SettingsView: View {
                 // ── КОГДА НАПОМНИТЬ ───────────────────────────────
                 sectionBlock("КОГДА НАПОМНИТЬ") {
                     VStack(spacing: 10) {
-                        ForEach(windows, id: \.id) { w in
-                            let isSelected = selectedHours.contains(w.id)
+                        ForEach(windows) { w in
+                            let isSelected = selectedWindows.contains(w.timeOfDay)
                             Button {
-                                var hours = selectedHours
-                                if isSelected {
-                                    if hours.count > 1 { hours.remove(w.id) }
-                                } else {
-                                    hours.insert(w.id)
-                                }
-                                nudgeHoursString = hours.sorted().map(String.init).joined(separator: ",")
-                                Task {
-                                    let ok = await notifier.requestPermission()
-                                    if ok {
-                                        await notifier.scheduleDailyNudges(hours: Array(hours))
-                                    }
-                                }
+                                toggleWindow(w.timeOfDay)
                             } label: {
                                 HStack(spacing: 14) {
                                     Image(systemName: w.icon)
@@ -75,46 +53,20 @@ struct SettingsView: View {
                                 .padding(.vertical, 14)
                                 .background(isSelected ? theme.accent.opacity(0.07) : theme.surface)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    RoundedRectangle(cornerRadius: DesignConstants.windowPickerRadius, style: .continuous)
                                         .stroke(isSelected ? theme.accent.opacity(0.35) : theme.border, lineWidth: 1)
                                 )
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .clipShape(RoundedRectangle(cornerRadius: DesignConstants.windowPickerRadius, style: .continuous))
                             }
                             .buttonStyle(.plain)
                             .animation(.spring(duration: 0.22), value: isSelected)
                         }
-                    }
-                }
 
-                // ── СКРИН-ТАЙМ ПОРОГ ──────────────────────────────
-                sectionBlock("СКРИН-ТАЙМ ПОРОГ") {
-                    HStack(spacing: 10) {
-                        ForEach(thresholdOptions, id: \.0) { minutes, label in
-                            let isSelected = screenThreshold == minutes
-                            Button {
-                                withAnimation(.spring(duration: 0.22)) { screenThreshold = minutes }
-                            } label: {
-                                VStack(spacing: 4) {
-                                    Text("\(minutes)")
-                                        .font(.system(size: 22, weight: .bold))
-                                        .foregroundStyle(isSelected ? theme.accent : theme.textPrimary)
-                                    Text(label.uppercased())
-                                        .font(.system(size: 9, weight: .semibold))
-                                        .tracking(0.5)
-                                        .foregroundStyle(theme.textSecondary.opacity(0.5))
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .background(isSelected ? theme.accent.opacity(0.08) : theme.surface)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                        .stroke(isSelected ? theme.accent.opacity(0.35) : theme.border, lineWidth: 1)
-                                )
-                                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                            }
-                            .buttonStyle(.plain)
-                            .animation(.spring(duration: 0.22), value: isSelected)
-                        }
+                        Text("Truly появится где-то внутри выбранного окна — не всегда в одно и то же время")
+                            .font(.system(size: 12))
+                            .foregroundStyle(theme.textSecondary.opacity(0.45))
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 2)
                     }
                 }
 
@@ -156,6 +108,27 @@ struct SettingsView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
+    // MARK: – Actions
+
+    private func toggleWindow(_ tod: NudgeWindow.TimeOfDay) {
+        var current = selectedWindows
+        if current.contains(tod) {
+            guard current.count > 1 else { return }  // нельзя убрать всё
+            current.remove(tod)
+        } else {
+            current.insert(tod)
+        }
+        nudgeWindowIdsString = NudgeWindow.TimeOfDay.toString(current)
+        Task {
+            let ok = await notifier.requestPermission()
+            if ok {
+                let ws = NudgeWindow.defaults.filter { current.contains($0.timeOfDay) }
+                await notifier.scheduleDailyNudges(windows: ws,
+                                                   lastSessionAt: logStore.logs.first?.completedAt)
+            }
+        }
+    }
+
     // MARK: – Section block
 
     private func sectionBlock<C: View>(_ label: String, @ViewBuilder content: () -> C) -> some View {
@@ -176,7 +149,7 @@ struct FavoritesAndHiddenView: View {
     @Environment(\.trulyTheme) private var theme
     @EnvironmentObject private var preferenceStore: PreferenceStore
 
-    private let catalog = CatalogService().loadActions()
+    private let catalog = CatalogService.shared.actions
 
     private var likedItems: [ActionItem] {
         catalog.filter { preferenceStore.likedActionIds.contains($0.id) }

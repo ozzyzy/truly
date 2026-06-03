@@ -185,7 +185,7 @@ struct TimerFlowView: View {
 
     private func startTimer() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        let t = Timer(timeInterval: 1, repeats: true) { _ in
             guard !isPaused else { return }
             if remaining > 0 {
                 remaining -= 1
@@ -194,6 +194,8 @@ struct TimerFlowView: View {
                 triggerTimeUpFlash()
             }
         }
+        RunLoop.main.add(t, forMode: .common)
+        timer = t
     }
 
     private func triggerTimeUpFlash() {
@@ -212,9 +214,7 @@ struct TimerFlowView: View {
 
     private func cancel() {
         timer?.invalidate()
-        let elapsed = max(0, total - remaining)
-        let minutes = Int(floor(Double(elapsed) / 60.0))
-        onFinished(minutes)
+        onFinished(0)   // 0 → HomeView guard пропускает логирование и просто делает path.removeLast()
     }
 
     private func finish() {

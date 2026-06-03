@@ -6,19 +6,89 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		68B493392FC4A48B0049FB2D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B493382FC4A48B0049FB2D /* WidgetKit.framework */; };
+		68B4933B2FC4A48B0049FB2D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B4933A2FC4A48B0049FB2D /* SwiftUI.framework */; };
+		68B493482FC4A48C0049FB2D /* TrulyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 68B493362FC4A48B0049FB2D /* TrulyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68B493462FC4A48C0049FB2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68E47A3B2F4B615D0011C170 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68B493352FC4A48B0049FB2D;
+			remoteInfo = TrulyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		68B4934D2FC4A48C0049FB2D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				68B493482FC4A48C0049FB2D /* TrulyWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		68B493362FC4A48B0049FB2D /* TrulyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrulyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		68B493382FC4A48B0049FB2D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		68B4933A2FC4A48B0049FB2D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		68E47A432F4B615D0011C170 /* Truly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Truly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		68B493492FC4A48C0049FB2D /* Exceptions for "TrulyWidget" folder in "TrulyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 68B493352FC4A48B0049FB2D /* TrulyWidgetExtension */;
+		};
+		68B4934F2FC4A5830049FB2D /* Exceptions for "Truly" folder in "Truly" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 68E47A422F4B615D0011C170 /* Truly */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		68B4933C2FC4A48B0049FB2D /* TrulyWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				68B493492FC4A48C0049FB2D /* Exceptions for "TrulyWidget" folder in "TrulyWidgetExtension" target */,
+			);
+			path = TrulyWidget;
+			sourceTree = "<group>";
+		};
 		68E47A452F4B615D0011C170 /* Truly */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				68B4934F2FC4A5830049FB2D /* Exceptions for "Truly" folder in "Truly" target */,
+			);
 			path = Truly;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		68B493332FC4A48B0049FB2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68B4933B2FC4A48B0049FB2D /* SwiftUI.framework in Frameworks */,
+				68B493392FC4A48B0049FB2D /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		68E47A402F4B615D0011C170 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,10 +99,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68B493372FC4A48B0049FB2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68B493382FC4A48B0049FB2D /* WidgetKit.framework */,
+				68B4933A2FC4A48B0049FB2D /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		68E47A3A2F4B615D0011C170 = {
 			isa = PBXGroup;
 			children = (
 				68E47A452F4B615D0011C170 /* Truly */,
+				68B4933C2FC4A48B0049FB2D /* TrulyWidget */,
+				68B493372FC4A48B0049FB2D /* Frameworks */,
 				68E47A442F4B615D0011C170 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				68E47A432F4B615D0011C170 /* Truly.app */,
+				68B493362FC4A48B0049FB2D /* TrulyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +130,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		68B493352FC4A48B0049FB2D /* TrulyWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68B4934A2FC4A48C0049FB2D /* Build configuration list for PBXNativeTarget "TrulyWidgetExtension" */;
+			buildPhases = (
+				68B493322FC4A48B0049FB2D /* Sources */,
+				68B493332FC4A48B0049FB2D /* Frameworks */,
+				68B493342FC4A48B0049FB2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				68B4933C2FC4A48B0049FB2D /* TrulyWidget */,
+			);
+			name = TrulyWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = TrulyWidgetExtension;
+			productReference = 68B493362FC4A48B0049FB2D /* TrulyWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		68E47A422F4B615D0011C170 /* Truly */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68E47A4E2F4B615F0011C170 /* Build configuration list for PBXNativeTarget "Truly" */;
@@ -55,10 +159,12 @@
 				68E47A3F2F4B615D0011C170 /* Sources */,
 				68E47A402F4B615D0011C170 /* Frameworks */,
 				68E47A412F4B615D0011C170 /* Resources */,
+				68B4934D2FC4A48C0049FB2D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				68B493472FC4A48C0049FB2D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				68E47A452F4B615D0011C170 /* Truly */,
@@ -77,9 +183,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2620;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					68B493352FC4A48B0049FB2D = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					68E47A422F4B615D0011C170 = {
 						CreatedOnToolsVersion = 26.2;
 					};
@@ -101,11 +210,19 @@
 			projectRoot = "";
 			targets = (
 				68E47A422F4B615D0011C170 /* Truly */,
+				68B493352FC4A48B0049FB2D /* TrulyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		68B493342FC4A48B0049FB2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		68E47A412F4B615D0011C170 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,6 +233,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		68B493322FC4A48B0049FB2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		68E47A3F2F4B615D0011C170 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,7 +249,79 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		68B493472FC4A48C0049FB2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68B493352FC4A48B0049FB2D /* TrulyWidgetExtension */;
+			targetProxy = 68B493462FC4A48C0049FB2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		68B4934B2FC4A48C0049FB2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TrulyWidget/TrulyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8MHNZXR9ZG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrulyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TrulyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.evgeniia.Truly.TrulyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68B4934C2FC4A48C0049FB2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TrulyWidget/TrulyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8MHNZXR9ZG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrulyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TrulyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.evgeniia.Truly.TrulyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		68E47A4C2F4B615F0011C170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -254,11 +450,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Truly/Truly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8MHNZXR9ZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Truly/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -286,11 +484,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Truly/Truly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8MHNZXR9ZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Truly/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,6 +516,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		68B4934A2FC4A48C0049FB2D /* Build configuration list for PBXNativeTarget "TrulyWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68B4934B2FC4A48C0049FB2D /* Debug */,
+				68B4934C2FC4A48C0049FB2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		68E47A3E2F4B615D0011C170 /* Build configuration list for PBXProject "Truly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

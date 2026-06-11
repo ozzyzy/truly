@@ -19,27 +19,27 @@ struct NudgeWindow: Codable, Identifiable, Hashable {
     static let defaults: [NudgeWindow] = [
         NudgeWindow(
             timeOfDay: .morning,
-            startHour: 7,  startMinute: 30,
-            endHour:   10, endMinute:   30,
+            startHour: 8,  startMinute: 0,
+            endHour:   11, endMinute:   0,
             icon: "sunrise",
             label: "Утро",
-            sublabel: "где-то между 7:30 и 10:30"
+            sublabel: "между 8:00 и 11:00"
         ),
         NudgeWindow(
             timeOfDay: .afternoon,
             startHour: 12, startMinute: 0,
-            endHour:   15, endMinute:   0,
+            endHour:   16, endMinute:   0,
             icon: "sun.max",
             label: "День",
-            sublabel: "где-то между 12:00 и 15:00"
+            sublabel: "между 12:00 и 16:00"
         ),
         NudgeWindow(
             timeOfDay: .evening,
             startHour: 19, startMinute: 0,
-            endHour:   22, endMinute:   30,
+            endHour:   22, endMinute:   0,
             icon: "moon.stars",
             label: "Вечер",
-            sublabel: "где-то между 19:00 и 22:30"
+            sublabel: "между 19:00 и 22:00"
         ),
     ]
 

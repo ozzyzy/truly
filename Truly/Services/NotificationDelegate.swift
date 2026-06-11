@@ -12,6 +12,13 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
+        let id = response.notification.request.identifier
+        // truly.timer.done — just bring the app to foreground, no extra navigation
+        if !id.hasPrefix("truly.nudge.") {
+            completionHandler()
+            return
+        }
+        // Nudge tapped → open suggestion card
         NotificationCenter.default.post(name: .trulyOpenSuggestion, object: nil)
         completionHandler()
     }

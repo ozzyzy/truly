@@ -62,7 +62,7 @@ struct SettingsView: View {
                             .animation(.spring(duration: 0.22), value: isSelected)
                         }
 
-                        Text("Truly появится где-то внутри выбранного окна — не всегда в одно и то же время")
+                        Text(verbatim: "Truly появится где-то внутри окна — каждый день в разное время")
                             .font(.system(size: 12))
                             .foregroundStyle(theme.textSecondary.opacity(0.45))
                             .multilineTextAlignment(.leading)
@@ -80,7 +80,7 @@ struct SettingsView: View {
                                 .font(.system(size: 14))
                                 .foregroundStyle(theme.textSecondary)
                                 .frame(width: 24)
-                            Text("Любимые и скрытые")
+                            Text(verbatim: "Любимые и скрытые")
                                 .font(.system(size: 15, weight: .medium))
                                 .foregroundStyle(theme.textPrimary)
                             Spacer()
@@ -176,7 +176,7 @@ struct FavoritesAndHiddenView: View {
                 if !hiddenItems.isEmpty {
                     actionSection("СКРЫТЫЕ", items: hiddenItems) { item in
                         Button { preferenceStore.unhide(item.id) } label: {
-                            Text("Вернуть")
+                            Text(verbatim: "Вернуть")
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundStyle(theme.accent)
                         }
@@ -185,7 +185,7 @@ struct FavoritesAndHiddenView: View {
                 }
 
                 if likedItems.isEmpty && hiddenItems.isEmpty {
-                    Text("Пока пусто")
+                    Text(verbatim: "Пока пусто")
                         .font(.system(size: 15))
                         .foregroundStyle(theme.textSecondary.opacity(0.4))
                         .padding(.top, 60)

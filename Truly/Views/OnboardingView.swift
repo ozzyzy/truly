@@ -214,7 +214,7 @@ struct OnboardingView: View {
                     .modifier(WiggleModifier(trigger: isWiggling))
                 }
 
-                Text("Truly появится где-то внутри выбранного окна — не всегда в одно и то же время")
+                Text("Truly появится где-то внутри окна — каждый день в разное время")
                     .font(.dm(13))
                     .foregroundStyle(theme.textSecondary.opacity(0.4))
                     .multilineTextAlignment(.leading)

@@ -28,13 +28,13 @@ struct StatsView: View {
 
                     // ── Recent sessions ───────────────────────────────
                     VStack(alignment: .leading, spacing: 14) {
-                        Text("ПОСЛЕДНИЕ СЕССИИ")
+                        Text(verbatim: "ПОСЛЕДНИЕ СЕССИИ")
                             .font(.system(size: 10, weight: .bold))
                             .tracking(1.4)
                             .foregroundStyle(theme.textSecondary.opacity(0.45))
 
                         if logStore.logs.isEmpty {
-                            Text("Пока ничего — начни свой первый момент")
+                            Text(verbatim: "Пока ничего — начни свой первый момент")
                                 .font(.system(size: 14))
                                 .foregroundStyle(theme.textSecondary.opacity(0.5))
                                 .padding(.vertical, 8)

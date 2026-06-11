@@ -250,12 +250,6 @@ struct HomeView: View {
                         isMilestone: isMilestone,
                         category: current?.category ?? .calm
                     ) {
-                        let total = logStore.totalMinutes
-                        path.append(HomeRoute.between(minutes, total))
-                    }
-
-                case .between(let lastMin, let totalMin):
-                    BetweenView(lastMin: lastMin, totalMin: totalMin) {
                         path = NavigationPath()
                         current = nextSuggestion()
                         isUserPicked = false
@@ -301,7 +295,7 @@ struct HomeView: View {
                 HStack(spacing: 5) {
                     Text(verbatim: "✦")
                         .foregroundStyle(theme.accent)
-                    Text(verbatim: "Сегодня вернула себе \(formatMinutes(todayMinutes))")
+                    Text(verbatim: "Сегодня: +\(formatMinutes(todayMinutes))")
                         .foregroundStyle(theme.textPrimary)
                 }
                 .font(.dm(13, .medium))
@@ -320,7 +314,7 @@ struct HomeView: View {
     @ViewBuilder
     private var gestureHintView: some View {
         if shuffleCount >= 3 && !showAlts {
-            Text("может, всё-таки попробуешь?")
+            Text(verbatim: "может, всё-таки попробуешь?")
                 .font(.newsreader(12))
                 .foregroundStyle(theme.textSecondary.opacity(0.7))
         } else if showSwipeHint {
@@ -452,7 +446,7 @@ struct HomeView: View {
                     .tracking(0.3)
                 Spacer()
                 Button { withAnimation { showAlts = false } } label: {
-                    Text("✕")
+                    Text(verbatim: "✕")
                         .font(.system(size: 14))
                         .foregroundStyle(theme.textSecondary.opacity(0.4))
                 }
@@ -501,11 +495,11 @@ struct HomeView: View {
             Image(systemName: "sparkles")
                 .font(.system(size: 40, weight: .thin))
                 .foregroundStyle(theme.accent)
-            Text("Все действия скрыты")
+            Text(verbatim: "Все действия скрыты")
                 .font(.system(.title3).weight(.semibold))
                 .foregroundStyle(theme.textPrimary)
             Button { showLibrary = true } label: {
-                Text("Открыть библиотеку")
+                Text(verbatim: "Открыть библиотеку")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(theme.accent)
             }

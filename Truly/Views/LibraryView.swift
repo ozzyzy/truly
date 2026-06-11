@@ -95,7 +95,7 @@ struct LibraryView: View {
                 Image(systemName: "heart")
                     .font(.system(size: 30, weight: .light))
                     .foregroundStyle(theme.textSecondary.opacity(0.3))
-                Text("Сохранённых пока нет")
+                Text(verbatim: "Сохранённых пока нет")
                     .font(.system(size: 15))
                     .foregroundStyle(theme.textSecondary.opacity(0.5))
             }

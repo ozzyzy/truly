@@ -11,8 +11,8 @@ struct DoneView: View {
     let category: ActionCategory
     let onGoHome: () -> Void
 
-    @State private var breathe = false
-    @State private var showContent = false
+    @State private var breathe      = false
+    @State private var showContent  = false
     @State private var particlesActive = true
 
     private var catColor: Color { category.catColor }
@@ -29,42 +29,32 @@ struct DoneView: View {
                 normalContent
             }
 
-            // Floating celebration particles
-            if particlesActive {
+            // Particles only for milestone
+            if isMilestone && particlesActive {
                 CelebrationParticles(color: catColor)
                     .allowsHitTesting(false)
             }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            withAnimation(.easeOut(duration: 0.5).delay(0.1)) {
-                showContent = true
-            }
-            withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                breathe = true
-            }
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            if isMilestone {
-                logStore.milestoneOneHourShown = true
-            }
-            // Fade out particles after a few seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                particlesActive = false
-            }
+            withAnimation(.easeOut(duration: 0.5).delay(0.1)) { showContent = true }
+            withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: true)) { breathe = true }
+            // Light haptic for normal, medium for milestone
+            UIImpactFeedbackGenerator(style: isMilestone ? .medium : .light).impactOccurred()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { particlesActive = false }
         }
     }
 
     // MARK: – Normal Done
 
-    // Category-aware "Ты verb." sentence parts [prefix, verb, suffix]
     private var verbSentence: (String, String, String) {
         switch category {
-        case .body:       return ("Ты ", "подвигалась", ".")
-        case .calm:       return ("Ты ", "вернулась", " к себе.")
-        case .reading:    return ("Ты ", "прочитала", ".")
-        case .creativity: return ("Ты ", "создала", " момент.")
-        case .home:       return ("Ты ", "позаботилась", " о пространстве.")
-        case .social:     return ("Ты ", "связалась", " с близким.")
+        case .body:       return ("Ты ", "в движении", ".")
+        case .calm:       return ("Ты ", "снова здесь", ".")
+        case .reading:    return ("Страницы ", "прочитаны", ".")
+        case .creativity: return ("Момент ", "создан", ".")
+        case .home:       return ("Вокруг ", "стало легче", ".")
+        case .social:     return ("Связь ", "стала ближе", ".")
         }
     }
 
@@ -73,7 +63,7 @@ struct DoneView: View {
             Spacer()
 
             // ✦ breathing accent
-            Text("✦")
+            Text(verbatim: "✦")
                 .font(.system(size: 32))
                 .foregroundStyle(catColor)
                 .scaleEffect(breathe ? 1.1 : 0.9)
@@ -89,19 +79,25 @@ struct DoneView: View {
                 .multilineTextAlignment(.center)
                 .tracking(-0.8)
                 .lineSpacing(2)
-                .padding(.bottom, 14)
+                .padding(.bottom, 10)
                 .opacity(showContent ? 1 : 0)
                 .offset(y: showContent ? 0 : 10)
 
-            // Reclaimed minutes
+            // Session minutes
             Text(verbatim: "\(category.displayName.uppercased()) · +\(minutes) мин")
                 .font(.dm(12, .medium))
                 .foregroundStyle(theme.textSecondary.opacity(0.55))
                 .tracking(0.4)
 
+            // Cumulative total
+            Text(verbatim: "всего возвращено: \(formatTotal(logStore.totalMinutes))")
+                .font(.dm(12))
+                .foregroundStyle(theme.textSecondary.opacity(0.35))
+                .tracking(0.2)
+                .padding(.top, 6)
+
             Spacer()
 
-            // CTA — primary dark
             TrulyButton("дальше", action: onGoHome)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 48)
@@ -128,18 +124,12 @@ struct DoneView: View {
             VStack(spacing: 16) {
                 Spacer()
 
-                // Big "1ч"
                 Text(verbatim: "1ч")
                     .font(.dm(72, .bold))
                     .tracking(-4)
                     .foregroundStyle(theme.accent)
                     .scaleEffect(showContent ? 1 : 0.8)
                     .opacity(showContent ? 1 : 0)
-
-                Text(verbatim: "Рекорд разблокирован")
-                    .font(.dm(11, .medium))
-                    .tracking(1)
-                    .foregroundStyle(theme.textSecondary.opacity(0.6))
 
                 Text(verbatim: "Твой первый час")
                     .font(.dm(26, .bold))
@@ -154,15 +144,20 @@ struct DoneView: View {
 
                 Spacer()
 
-                TrulyButton("Продолжить") {
-                    onGoHome()
-                }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 48)
+                TrulyButton("Продолжить", action: onGoHome)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 48)
             }
         }
     }
 
+    // MARK: – Helpers
+
+    private func formatTotal(_ m: Int) -> String {
+        if m < 60 { return "\(m) мин" }
+        let h = m / 60, r = m % 60
+        return r > 0 ? "\(h) ч \(r) мин" : "\(h) ч"
+    }
 }
 
 // MARK: – Celebration particles
@@ -174,9 +169,9 @@ struct CelebrationParticles: View {
     @State private var animating = false
 
     struct Particle: Identifiable {
-        let id = UUID()
-        let x: CGFloat
-        let size: CGFloat
+        let id    = UUID()
+        let x:     CGFloat
+        let size:  CGFloat
         let delay: Double
         let drift: CGFloat
     }
@@ -192,24 +187,19 @@ struct CelebrationParticles: View {
                             x: p.x + (animating ? p.drift : 0),
                             y: animating ? -20 : geo.size.height * 0.5
                         )
-                        .animation(
-                            .easeOut(duration: 2.2).delay(p.delay),
-                            value: animating
-                        )
+                        .animation(.easeOut(duration: 2.2).delay(p.delay), value: animating)
                 }
             }
             .onAppear {
                 particles = (0..<16).map { _ in
                     Particle(
-                        x: CGFloat.random(in: 40...(geo.size.width - 40)),
-                        size: CGFloat.random(in: 3...8),
+                        x:     CGFloat.random(in: 40...(geo.size.width - 40)),
+                        size:  CGFloat.random(in: 3...8),
                         delay: Double.random(in: 0...0.6),
                         drift: CGFloat.random(in: -30...30)
                     )
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    animating = true
-                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { animating = true }
             }
         }
         .ignoresSafeArea()
